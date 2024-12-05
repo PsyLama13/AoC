@@ -8,7 +8,7 @@ import java.util.List;
 public class SolverD5 {
 
     public static void main(String[] args) throws IOException {
-        List<String> input = Helper.readInput("y2020/d5.txt");
+        List<String> input = Helper.readInput("y2020/d5d.txt");
         List<String> debug = List.of("FBFBBFFRLR");
 
         BoardingHelper boardingHelper = new BoardingHelper(input);

@@ -9,7 +9,7 @@ public class SolverD5 {
 
     public static void main(String[] args) throws IOException {
         List<String> debug = Helper.readInput("d5_debug.txt");
-        List<String> test = Helper.readInput("d5.txt");
+        List<String> test = Helper.readInput("d5d.txt");
 
         solveFirst(test);
     }
