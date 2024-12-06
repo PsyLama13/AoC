@@ -71,34 +71,32 @@ public class FunctionHelper {
         }
     }
 
-    public int calc1(){
+    public int calc1() {
         int output = 0;
-        for(MulFunction mulFunction : mulFunctionList){
+        for (MulFunction mulFunction : mulFunctionList) {
             output += mulFunction.getResult();
         }
         return output;
     }
 
-    public int calc2(){
+    public int calc2() {
         int output = 0;
-       functionList.sort(Comparator.comparing(MemoryFunction::getLocation));
-       boolean enabled = true;
-       for(MemoryFunction fun : functionList){
-           FunctionType type = fun.getFunctionType();
-           switch (type){
-               case DO -> {
-                   enabled = true;
-               }
-               case DONT -> {
-                   enabled = false;
-               }
-               case MUL -> {
-                   if(enabled){
-                       output += fun.getResult();
-                   }
-               }
-           }
-       }
-       return output;
+        functionList.sort(Comparator.comparing(MemoryFunction::getLocation));
+        boolean enabled = true;
+        for (MemoryFunction fun : functionList) {
+            FunctionType type = fun.getFunctionType();
+            switch (type) {
+                case DO -> enabled = true;
+
+                case DONT -> enabled = false;
+
+                case MUL -> {
+                    if (enabled) {
+                        output += fun.getResult();
+                    }
+                }
+            }
+        }
+        return output;
     }
 }

@@ -1,9 +1,9 @@
 package y2024.d6;
 
-public enum TyleType {
+public enum TileType {
     OPEN, BLOCKED;
 
-    public static TyleType parseTyleType(String s) {
+    public static TileType parseTileType(String s) {
         if (s.equals(".")) {
             return OPEN;
         }
@@ -14,6 +14,7 @@ public enum TyleType {
         return null;
     }
 
+    @Override
     public String toString() {
         return switch (this) {
             case OPEN -> ".";

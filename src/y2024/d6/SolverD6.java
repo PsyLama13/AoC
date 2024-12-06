@@ -11,7 +11,7 @@ public class SolverD6 {
         List<String> debug = Helper.readInput("y2024/d6d.txt");
 
         PathChecker pathChecker = new PathChecker(input);
-        //System.out.println(pathChecker.calc1());
+        System.out.println(pathChecker.calc1());
         System.out.println(pathChecker.calc2());
     }
 }

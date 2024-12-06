@@ -61,7 +61,7 @@ public class CrossSolver {
         String ss1 = wordMap.get(s1);
         String ss2 = wordMap.get(s2);
 
-        if(sm1 == null || sm2 == null || ss1 == null || ss2 == null){
+        if (sm1 == null || sm2 == null || ss1 == null || ss2 == null) {
             return false;
         }
 

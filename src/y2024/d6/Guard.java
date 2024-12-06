@@ -32,12 +32,12 @@ public class Guard {
         reset();
         this.grid = grid;
         while (true) {
-            TyleType nextTile = getTileAhead();
+            TileType nextTile = getTileAhead();
             if (nextTile == null) {
                 return;
             }
 
-            while (nextTile.equals(TyleType.BLOCKED)) {
+            while (nextTile.equals(TileType.BLOCKED)) {
                 handleTurning(nextTile);
                 nextTile = getTileAhead();
             }
@@ -52,12 +52,12 @@ public class Guard {
         reset();
         this.grid = grid;
         while (true) {
-            TyleType nextTile = getTileAhead();
+            TileType nextTile = getTileAhead();
             if (nextTile == null) {
                 return false;
             }
 
-            while (nextTile.equals(TyleType.BLOCKED)) {
+            while (nextTile.equals(TileType.BLOCKED)) {
                 handleTurning(nextTile);
                 nextTile = getTileAhead();
             }
@@ -71,8 +71,8 @@ public class Guard {
         }
     }
 
-    private void handleTurning(TyleType nextTile) {
-        if (nextTile == TyleType.BLOCKED) {
+    private void handleTurning(TileType nextTile) {
+        if (nextTile == TileType.BLOCKED) {
             turn();
         }
     }
@@ -86,7 +86,7 @@ public class Guard {
         }
     }
 
-    private TyleType getTileAhead() {
+    private TileType getTileAhead() {
         Coordinate ahead = getCoordinateAhead();
         return grid.get(ahead);
     }

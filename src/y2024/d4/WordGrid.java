@@ -21,31 +21,9 @@ public class WordGrid {
         }
     }
 
-    public void printMap() {
-        for (int y = 0; y < maxY; y++) {
-            StringBuilder s = new StringBuilder();
-            for (int x = 0; x < maxX; x++) {
-                s.append(wordMap.get(new Coordinate(x, y)));
-            }
-            System.out.println(s);
-        }
-    }
-
     List<Coordinate> findAllLetters(String letter) {
         return wordMap.entrySet().stream().filter(i -> i.getValue().equals(letter)).map(Map.Entry::getKey).toList();
     }
-
-    List<Coordinate> findAllMtoX(Coordinate x) {
-        List<Coordinate> neighbours = x.getAllNeightboursWithDiagonals();
-        List<Coordinate> output = new ArrayList<>();
-        for (Coordinate c : neighbours) {
-            if (wordMap.containsKey(c) && wordMap.get(c).equals("M")) {
-                output.add(c);
-            }
-        }
-        return output;
-    }
-
 
     public int findAllXMAS() {
         int counter = 0;
@@ -67,11 +45,11 @@ public class WordGrid {
 
     public int findAllCrossMAS() {
         int counter = 0;
-        List<Coordinate> alllA = findAllLetters("A");
+        List<Coordinate> allA = findAllLetters("A");
 
-        for(Coordinate a : alllA){
+        for (Coordinate a : allA) {
             CrossSolver crossSolver = new CrossSolver(a);
-            if(crossSolver.isValid(wordMap)){
+            if (crossSolver.isValid(wordMap)) {
                 counter++;
             }
         }

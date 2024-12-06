@@ -1,10 +1,11 @@
 package y2024.d3;
 
-public class MulFunction implements MemoryFunction{
+public class MulFunction implements MemoryFunction {
 
     int n1;
     int n2;
     int location;
+
     public MulFunction(int num1, int num2, int location) {
         n1 = num1;
         n2 = num2;

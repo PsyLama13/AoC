@@ -92,9 +92,7 @@ public class SafetyProtocolHelper {
         list.add(maxIndex, num);
 
         Coordinate c = getWrongNumberTuple(list);
-        if(c == null){
-            return;
-        }else{
+        if (c != null) {
             insertNumberCorrectly(c.x(), list);
         }
     }

@@ -16,10 +16,9 @@ public class PathChecker {
         for (int y = 0; y < maxY; y++) {
             for (int x = 0; x < maxX; x++) {
                 String letter = String.valueOf(input.get(y).charAt(x));
-                TyleType tileType = TyleType.parseTyleType(letter);
+                TileType tileType = TileType.parseTileType(letter);
                 if (tileType == null) {
-                    // handle guard;
-                    grid.addField(x, y, TyleType.OPEN);
+                    grid.addField(x, y, TileType.OPEN);
                     Direction direction = getGuardDirection(letter);
                     guard = new Guard(new Coordinate(x, y), direction);
                 } else {
@@ -27,7 +26,6 @@ public class PathChecker {
                 }
             }
         }
-        //grid.print(); // only debugging
         guard.run(grid);
     }
 
