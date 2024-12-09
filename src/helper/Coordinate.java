@@ -72,4 +72,9 @@ public record Coordinate(int x, int y) {
         int dy = Math.abs(this.y() - x.y());
         return dx <= 1 && dy <= 1;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
 }
