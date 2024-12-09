@@ -2,7 +2,7 @@ package y2024.d9;
 
 public class Disk {
 
-    int[] disk;
+    int[] diskList;
 
     public Disk(String input) {
         // Estimate size of the disk array (sum of all digits)
@@ -11,7 +11,7 @@ public class Disk {
             totalLength += Character.getNumericValue(c);
         }
 
-        disk = new int[totalLength];
+        diskList = new int[totalLength];
         int id = 0;
         int pos = 0;
 
@@ -20,13 +20,13 @@ public class Disk {
             int blockID = (i % 2 == 0) ? id++ : -1; // File ID or free space (-1)
 
             for (int j = 0; j < length; j++) {
-                disk[pos++] = blockID;
+                diskList[pos++] = blockID;
             }
         }
     }
 
     void compactDisk() {
-        int numPointer = findNextNum(disk.length - 1);
+        int numPointer = findNextNum(diskList.length - 1);
         int dotCounter = findNextDot(0);
 
         while (true) {
@@ -60,7 +60,7 @@ public class Disk {
                 return start;
             } else {
                 start = findNextDot(end + 1);
-                if(start >= endNum){
+                if (start >= endNum) {
                     return -1;
                 }
                 end = findEndOfDot(start);
@@ -69,14 +69,14 @@ public class Disk {
     }
 
     private void swapNumbers(int numPointer, int dotCounter) {
-        int temp = disk[numPointer];
-        disk[numPointer] = disk[dotCounter];
-        disk[dotCounter] = temp;
+        int temp = diskList[numPointer];
+        diskList[numPointer] = diskList[dotCounter];
+        diskList[dotCounter] = temp;
     }
 
     private int findNextDot(int startIndex) {
         while (true) {
-            if (disk[startIndex] == -1) {
+            if (diskList[startIndex] == -1) {
                 return startIndex;
             } else {
                 startIndex++;
@@ -87,7 +87,7 @@ public class Disk {
     private int findEndOfDot(int startDot) {
         int index = startDot + 1;
         while (true) {
-            if (disk[index] != -1) {
+            if (diskList[index] != -1) {
                 return index;
             } else {
                 index++;
@@ -101,7 +101,7 @@ public class Disk {
             if (startIndex < 0) {
                 return -1;
             }
-            if (disk[startIndex] != -1) {
+            if (diskList[startIndex] != -1) {
                 return startIndex;
             } else {
                 startIndex--;
@@ -110,13 +110,13 @@ public class Disk {
     }
 
     private int findEndOfNum(int startNum) {
-        int num = disk[startNum];
+        int num = diskList[startNum];
         int index = startNum;
         while (true) {
-            if(index < 0){
+            if (index < 0) {
                 return -1;
             }
-            if (disk[index] != num) {
+            if (diskList[index] != num) {
                 return index + 1;
             } else {
                 index--;
@@ -126,8 +126,8 @@ public class Disk {
 
     long calc1() {
         long checksum = 0;
-        for (int position = 0; position < disk.length; position++) {
-            int blockID = disk[position];
+        for (int position = 0; position < diskList.length; position++) {
+            int blockID = diskList[position];
             if (blockID != -1) { // Skip free space
                 checksum += (long) position * blockID;
             }
@@ -137,20 +137,20 @@ public class Disk {
 
     @Override
     public String toString() {
-        String output = "";
-        for (int i : disk) {
+        StringBuilder output = new StringBuilder();
+        for (int i : diskList) {
             if (i == -1) {
-                output += ".";
+                output.append(".");
             } else {
-                output += i;
+                output.append(i);
             }
 
         }
-        return output;
+        return output.toString();
     }
 
     public void compactDiskFully() {
-        int startNum = findNextNum(disk.length - 1);
+        int startNum = findNextNum(diskList.length - 1);
         int endNum = findEndOfNum(startNum);
 
         while (true) {
@@ -158,7 +158,7 @@ public class Disk {
 
             startNum = findNextNum(endNum - 1);
             endNum = findEndOfNum(startNum);
-            if(endNum < 0){
+            if (endNum < 0) {
                 return;
             }
         }
