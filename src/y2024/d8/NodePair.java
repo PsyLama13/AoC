@@ -1,19 +1,18 @@
 package y2024.d8;
 
 import helper.Coordinate;
-import y2024.d8_2.test.Divider;
 
 import java.util.*;
 
 public class NodePair {
-    private Coordinate p1;
-    private Coordinate p2;
-    private int maxX;
-    private int maxY;
+    private final Coordinate p1;
+    private final Coordinate p2;
+    private final int maxX;
+    private final int maxY;
     int dx;
     int dy;
-    private Set<Coordinate> antiNodes = new HashSet<>();
-    private Set<Coordinate> fullAntiNodes = new HashSet<>();
+    private final Set<Coordinate> antiNodes = new HashSet<>();
+    private final Set<Coordinate> fullAntiNodes = new HashSet<>();
 
     public NodePair(Coordinate p1, Coordinate p2, int maxX, int maxY) {
         this.p1 = p1;
@@ -23,7 +22,7 @@ public class NodePair {
         dx = p2.x() - p1.x();
         dy = p2.y() - p1.y();
 
-        calculateAntinodes();
+        calculateAntiNodes();
         calculateFullAntiNodes();
     }
 
@@ -35,9 +34,9 @@ public class NodePair {
     private void calcDownwards() {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             Coordinate c = new Coordinate(p1.x() - i * dx, p1.y() - i * dy);
-            if(isOnMap(c)){
+            if (isOnMap(c)) {
                 fullAntiNodes.add(c);
-            }else {
+            } else {
                 return;
             }
         }
@@ -46,15 +45,15 @@ public class NodePair {
     private void calcUpwards() {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             Coordinate c = new Coordinate(p2.x() + i * dx, p2.y() + i * dy);
-            if(isOnMap(c)){
+            if (isOnMap(c)) {
                 fullAntiNodes.add(c);
-            }else {
+            } else {
                 return;
             }
         }
     }
 
-    private void calculateAntinodes() {
+    private void calculateAntiNodes() {
 
         Coordinate a1 = new Coordinate(p2.x() + dx, p2.y() + dy);
         Coordinate a2 = new Coordinate(p1.x() - dx, p1.y() - dy);
