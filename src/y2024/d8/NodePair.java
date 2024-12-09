@@ -1,6 +1,7 @@
 package y2024.d8;
 
 import helper.Coordinate;
+import y2024.d8_2.test.Divider;
 
 import java.util.*;
 
@@ -9,21 +10,51 @@ public class NodePair {
     private Coordinate p2;
     private int maxX;
     private int maxY;
+    int dx;
+    int dy;
     private Set<Coordinate> antiNodes = new HashSet<>();
+    private Set<Coordinate> fullAntiNodes = new HashSet<>();
 
     public NodePair(Coordinate p1, Coordinate p2, int maxX, int maxY) {
         this.p1 = p1;
         this.p2 = p2;
         this.maxX = maxX;
         this.maxY = maxY;
+        dx = p2.x() - p1.x();
+        dy = p2.y() - p1.y();
 
         calculateAntinodes();
+        calculateFullAntiNodes();
+    }
+
+    private void calculateFullAntiNodes() {
+        calcUpwards();
+        calcDownwards();
+    }
+
+    private void calcDownwards() {
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            Coordinate c = new Coordinate(p1.x() - i * dx, p1.y() - i * dy);
+            if(isOnMap(c)){
+                fullAntiNodes.add(c);
+            }else {
+                return;
+            }
+        }
+    }
+
+    private void calcUpwards() {
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            Coordinate c = new Coordinate(p2.x() + i * dx, p2.y() + i * dy);
+            if(isOnMap(c)){
+                fullAntiNodes.add(c);
+            }else {
+                return;
+            }
+        }
     }
 
     private void calculateAntinodes() {
-
-        int dx = p2.x() - p1.x();
-        int dy = p2.y() - p1.y();
 
         Coordinate a1 = new Coordinate(p2.x() + dx, p2.y() + dy);
         Coordinate a2 = new Coordinate(p1.x() - dx, p1.y() - dy);
@@ -35,22 +66,20 @@ public class NodePair {
     }
 
     private boolean isOnMap(Coordinate c) {
-        return c.x() >= 0 && c.x() <= maxX && c.y() >= 0 && c.y() <= maxY;
+        return c.x() >= 0 && c.x() < maxX && c.y() >= 0 && c.y() < maxY;
     }
 
     public Set<Coordinate> getAntiNodes() {
         return antiNodes;
     }
 
+    public Set<Coordinate> getFullAntiNodes() {
+        return fullAntiNodes;
+    }
+
     @Override
     public int hashCode() {
         return 32 * (p1.x() + p1.y() + p2.x() + p2.y());
-    }
-
-    public void printAntiNodes() {
-        for (Coordinate i : antiNodes) {
-            System.out.println(i.toString());
-        }
     }
 
     @Override

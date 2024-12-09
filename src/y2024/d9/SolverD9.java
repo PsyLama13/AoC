@@ -10,14 +10,13 @@ public class SolverD9 {
         List<String> input = Helper.readInput("y2024/d9.txt");
         List<String> debug = Helper.readInput("y2024/d9d.txt");
 
-        //main1(input.get(0));
-        main2(input.get(0));
+        main1(debug.get(0)); // 6366665108136
+        main2(debug.get(0)); // 6398065450842
 
     }
 
     static void main1(String input) {
         Disk disk = new Disk(input);
-
         disk.compactDisk();
         long checksum = disk.calc1();
         System.out.println("Checksum: " + checksum);

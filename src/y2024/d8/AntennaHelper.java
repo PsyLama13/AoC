@@ -23,6 +23,8 @@ public class AntennaHelper {
                 }
             }
         }
+
+
     }
 
     public int calc1() {
@@ -47,5 +49,16 @@ public class AntennaHelper {
             }
         }
         return output;
+    }
+
+    public int calc2() {
+        Set<Coordinate> antiPoints = new HashSet<>();
+        for (Map.Entry<String, List<Coordinate>> entry : map.entrySet()) {
+            List<NodePair> nodePairs = calculateNodePairs(entry.getValue());
+            for (NodePair nodePair : nodePairs) {
+                antiPoints.addAll(nodePair.getFullAntiNodes());
+            }
+        }
+        return antiPoints.size();
     }
 }

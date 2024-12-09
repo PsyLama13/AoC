@@ -12,6 +12,7 @@ public class SolverD8 {
 
         AntennaHelper antennaHelper = new AntennaHelper(input);
 
-        System.out.println(antennaHelper.calc1());
+        //System.out.println(antennaHelper.calc1());
+        System.out.println(antennaHelper.calc2());
     }
 }
