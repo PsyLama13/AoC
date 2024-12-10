@@ -1,8 +1,5 @@
 package helper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public record Coordinate(int x, int y) {
     // top left is 0,0
 
@@ -38,25 +35,11 @@ public record Coordinate(int x, int y) {
         return new Coordinate(x - 1, y + 1);
     }
 
-    public List<Coordinate> getAllNeighbours() {
-        return List.of(this.up(), this.down(), this.left(), this.right());
-    }
-
-    public List<Coordinate> getAllNeightboursWithDiagonals() {
-        List<Coordinate> output = new ArrayList<>(getAllNeighbours());
-        output.addAll(List.of(this.upLeft(), this.upRight(), this.downLeft(), this.downRight()));
-        return output;
-    }
-
-    public List<Coordinate> getAllDiagonals(){
-        return List.of(this.upLeft(), this.upRight(), this.downLeft(), this.downRight());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Coordinate that)) return false;
-        return x == that.x && y == that.y;
+        if (!(o instanceof Coordinate)) return false;
+        return x == ((Coordinate) o).x() && y == ((Coordinate) o).y();
     }
 
     @Override

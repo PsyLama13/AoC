@@ -10,8 +10,12 @@ public class SolverD10 {
         List<String> input = Helper.readInput("year2024/d10.txt");
         List<String> debug = Helper.readInput("year2024/d10d.txt");
 
-        TopographicHelper topo = new TopographicHelper(input);
-        System.out.println(topo.calc1());
-        System.out.println(topo.calc2());
+        TopographicHelper topographicHelperDebug = new TopographicHelper(debug);
+        System.out.println(topographicHelperDebug.calc1());
+        System.out.println(topographicHelperDebug.calc2());
+
+        TopographicHelper topographicHelperInput = new TopographicHelper(input);
+        System.out.println(topographicHelperInput.calc1());
+        System.out.println(topographicHelperInput.calc2());
     }
 }

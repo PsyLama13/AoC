@@ -9,8 +9,8 @@ import java.util.Set;
 public class TrailHead {
     private final Map<Coordinate, Integer> coordinateToHeightMap;
     private final Coordinate start;
-    private Integer score;
-    private Integer rating;
+    private final Integer score;
+    private final Integer rating;
 
     public TrailHead(Coordinate start, Map<Coordinate, Integer> coordinateToHeightMap) {
         this.coordinateToHeightMap = coordinateToHeightMap;
@@ -36,11 +36,11 @@ public class TrailHead {
     }
 
     private int dfsRating(Coordinate current, int currentHeight) {
-        if (!coordinateToHeightMap.containsKey(current) || coordinateToHeightMap.get(current) != currentHeight){
+        if (!coordinateToHeightMap.containsKey(current) || coordinateToHeightMap.get(current) != currentHeight) {
             return 0;
         }
 
-        if(coordinateToHeightMap.get(current) == 9){
+        if (coordinateToHeightMap.get(current) == 9) {
             return 1;
         }
 
