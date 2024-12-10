@@ -5,6 +5,10 @@ import java.util.List;
 
 public class SignHelper {
 
+    private SignHelper() {
+        throw new IllegalStateException("Utility Class");
+    }
+
     public static List<List<Operation>> generateOperatorList(int amount) {
         List<List<Operation>> results = new ArrayList<>();
         generatePermutationsRecursively(amount - 1, new ArrayList<>(), results);
