@@ -1,12 +1,11 @@
 package challenges.year2020.d7;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Bag {
     String name;
-    List<String> contents = new ArrayList<>();
-    BagTree tree;
+    Set<String> contents = new HashSet<>();
     public Bag(String s) {
         String[] splitter = s.split(" bags contain ");
         name = splitter[0];
@@ -21,18 +20,6 @@ public class Bag {
                 String asdf = temp[1] + " " + temp [2];
                 contents.add(asdf);
             }
-        }
-    }
-
-    public void fillTree(List<Bag> bags) {
-        List<Bag> children = new ArrayList<>();
-        for(String content : contents){
-            Bag bag = bags.stream().filter(i -> i.name.equals(content)).findFirst().orElseThrow();
-            children.add(bag);
-        }
-        tree = new BagTree(this, null, children);
-        for(Bag child : children){
-            //fillTreeRecursively()
         }
     }
 }

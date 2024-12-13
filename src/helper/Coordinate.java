@@ -60,4 +60,9 @@ public record Coordinate(int x, int y) {
     public String toString() {
         return "(" + x + "," + y + ")";
     }
+
+    public Coordinate plus(Coordinate o) {
+        return new Coordinate(x + o.x(), y + o.y());
+    }
+
 }
