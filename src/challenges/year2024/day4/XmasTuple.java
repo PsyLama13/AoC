@@ -42,8 +42,8 @@ public class XmasTuple {
     }
 
     public boolean isValid(Map<Coordinate, String> wordMap) {
-        int dx = m.x() - x.x();
-        int dy = m.y() - x.y();
+        int dx = (int) (m.x() - x.x());
+        int dy = (int) (m.y() - x.y());
         Coordinate a = new Coordinate(m.x() + dx, m.y() + dy);
         Coordinate s = new Coordinate(a.x() + dx, a.y() + dy);
         String aString = wordMap.get(a);

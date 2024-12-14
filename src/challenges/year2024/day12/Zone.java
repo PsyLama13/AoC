@@ -20,10 +20,10 @@ public class Zone {
     }
 
     private void initMinMaxValues() {
-        minY = coordinates.stream().min(Comparator.comparingInt(Coordinate::y)).orElseThrow().y();
-        maxY = coordinates.stream().max(Comparator.comparingInt(Coordinate::y)).orElseThrow().y();
-        minX = coordinates.stream().min(Comparator.comparingInt(Coordinate::x)).orElseThrow().x();
-        maxX = coordinates.stream().max(Comparator.comparingInt(Coordinate::x)).orElseThrow().x();
+        minY = Math.toIntExact(coordinates.stream().min(Comparator.comparingLong(Coordinate::y)).orElseThrow().y());
+        maxY = Math.toIntExact(coordinates.stream().max(Comparator.comparingLong(Coordinate::y)).orElseThrow().y());
+        minX = (int) coordinates.stream().min(Comparator.comparingLong(Coordinate::x)).orElseThrow().x();
+        maxX = (int) coordinates.stream().max(Comparator.comparingLong(Coordinate::x)).orElseThrow().x();
     }
 
     public Set<Coordinate> getCoordinates() {

@@ -17,47 +17,47 @@ public class OceanVentMap {
             Cloud c = new Cloud(s);
             adjustMaxValues(c);
             List<Coordinate> coordinates = c.getCloudLine();
-            for(Coordinate coordinate : coordinates){
+            for (Coordinate coordinate : coordinates) {
                 pushCoordinateToMap(coordinate);
             }
         }
     }
 
     private void pushCoordinateToMap(Coordinate coordinate) {
-        if(!map.containsKey(coordinate)){
+        if (!map.containsKey(coordinate)) {
             map.put(coordinate, 1);
-        }else {
+        } else {
             int value = map.get(coordinate);
-            map.put(coordinate, value+1);
+            map.put(coordinate, value + 1);
         }
     }
 
     private void adjustMaxValues(Cloud c) {
         if (c.startPoint.x() > maxX) {
-            maxX = c.startPoint.x();
+            maxX = (int) c.startPoint.x();
         }
 
         if (c.startPoint.y() > maxY) {
-            maxY = c.startPoint.y();
+            maxY = (int) c.startPoint.y();
         }
 
         if (c.endPoint.x() > maxX) {
-            maxX = c.endPoint.x();
+            maxX = (int) c.endPoint.x();
         }
 
         if (c.endPoint.y() > maxY) {
-            maxY = c.endPoint.y();
+            maxY = (int) c.endPoint.y();
         }
     }
 
-    public void drawMap(){
+    public void drawMap() {
         StringBuilder output = new StringBuilder();
-        for(int y = 0; y <= maxY; y++){
-            for(int x = 0; x <= maxX; x++){
-                Coordinate c = new Coordinate(x,y);
-                if(map.containsKey(c)){
+        for (int y = 0; y <= maxY; y++) {
+            for (int x = 0; x <= maxX; x++) {
+                Coordinate c = new Coordinate(x, y);
+                if (map.containsKey(c)) {
                     output.append(map.get(c));
-                }else{
+                } else {
                     output.append(".");
                 }
             }
@@ -66,7 +66,7 @@ public class OceanVentMap {
         System.out.println(output);
     }
 
-    public int getScore(){
+    public int getScore() {
         return Math.toIntExact(map.entrySet().stream().filter(s -> s.getValue() > 1).count());
     }
 }

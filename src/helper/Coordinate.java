@@ -1,6 +1,6 @@
 package helper;
 
-public record Coordinate(int x, int y) {
+public record Coordinate(long x, long y) {
     // top left is 0,0
 
     public Coordinate up() {
@@ -44,15 +44,15 @@ public record Coordinate(int x, int y) {
 
     @Override
     public int hashCode() {
-        return 31 * x * y;
+        return Math.toIntExact(31 * x * y);
     }
 
     public boolean isNeighbouringTo(Coordinate x) {
         if (this.equals(x)) {
             return false;
         }
-        int dx = Math.abs(this.x() - x.x());
-        int dy = Math.abs(this.y() - x.y());
+        long dx = Math.abs(this.x() - x.x());
+        long dy = Math.abs(this.y() - x.y());
         return dx <= 1 && dy <= 1;
     }
 

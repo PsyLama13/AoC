@@ -78,7 +78,7 @@ public class SafetyProtocolHelper {
         return output;
     }
 
-    private void insertNumberCorrectly(int num, ArrayList<Integer> list) {
+    private void insertNumberCorrectly(long num, ArrayList<Integer> list) {
         List<Integer> beforeList = safetyRules.get(num);
         int maxIndex = Integer.MAX_VALUE;
         for (int n : beforeList) {
@@ -89,7 +89,7 @@ public class SafetyProtocolHelper {
         }
         int numIndex = list.indexOf(num);
         list.remove(numIndex);
-        list.add(maxIndex, num);
+        list.add(maxIndex, (int)num);
 
         Coordinate c = getWrongNumberTuple(list);
         if (c != null) {

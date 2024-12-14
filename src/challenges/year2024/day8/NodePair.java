@@ -19,8 +19,8 @@ public class NodePair {
         this.p2 = p2;
         this.maxX = maxX;
         this.maxY = maxY;
-        dx = p2.x() - p1.x();
-        dy = p2.y() - p1.y();
+        dx = (int) (p2.x() - p1.x());
+        dy = (int) (p2.y() - p1.y());
 
         calculateAntiNodes();
         calculateFullAntiNodes();
@@ -78,7 +78,7 @@ public class NodePair {
 
     @Override
     public int hashCode() {
-        return 32 * (p1.x() + p1.y() + p2.x() + p2.y());
+        return (int) (32 * (p1.x() + p1.y() + p2.x() + p2.y()));
     }
 
     @Override

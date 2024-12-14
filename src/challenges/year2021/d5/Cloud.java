@@ -35,32 +35,32 @@ public class Cloud {
         if (direction == null) {
             return output;
         }
-        int xDiff = endPoint.x() - startPoint.x();
-        int yDiff = endPoint.y() - startPoint.y();
+        int xDiff = (int) (endPoint.x() - startPoint.x());
+        int yDiff = (int) (endPoint.y() - startPoint.y());
         Coordinate temp = startPoint;
         output.add(temp);
-        switch (direction){
+        switch (direction) {
 
             case UP -> {
-                for(int i = 0; i < -yDiff; i++){
+                for (int i = 0; i < -yDiff; i++) {
                     temp = temp.up();
                     output.add(temp);
                 }
             }
             case DOWN -> {
-                for(int i = 0; i < yDiff; i++){
+                for (int i = 0; i < yDiff; i++) {
                     temp = temp.down();
                     output.add(temp);
                 }
             }
             case LEFT -> {
-                for(int i = 0; i < -xDiff; i++){
+                for (int i = 0; i < -xDiff; i++) {
                     temp = temp.left();
                     output.add(temp);
                 }
             }
             case RIGHT -> {
-                for(int i = 0; i < xDiff; i++){
+                for (int i = 0; i < xDiff; i++) {
                     temp = temp.right();
                     output.add(temp);
                 }

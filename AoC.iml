@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="commons-math3-3.6.1" level="application" />
+    <orderEntry type="library" exported="" name="commons-math4-4.0-beta1-bin" level="project" />
   </component>
 </module>
