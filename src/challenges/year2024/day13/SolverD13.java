@@ -10,10 +10,11 @@ public class SolverD13 {
         List<String> input = Helper.readInput("year2024/d13.txt");
         List<String> debug = Helper.readInput("year2024/d13d.txt");
 
-        ClawMachineHelper clawMachineHelper = new ClawMachineHelper(debug);
+        ClawMachineHelper clawMachineHelper = new ClawMachineHelper(input);
 
         //System.out.println(clawMachineHelper.calc1());
         System.out.println(clawMachineHelper.calc2());
+
     }
 
 }

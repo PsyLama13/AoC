@@ -14,6 +14,6 @@ public class Robo {
     }
 
     public Coordinate getPositionAfterSteps(int steps) {
-        return new Coordinate(startPosition.x() + velX * steps, startPosition.y() + velY * steps);
+        return new Coordinate(startPosition.x() + (long) velX * steps, startPosition.y() + (long) velY * steps);
     }
 }

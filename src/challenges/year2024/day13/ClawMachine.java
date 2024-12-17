@@ -2,9 +2,7 @@ package challenges.year2024.day13;
 
 import helper.Coordinate;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.PriorityQueue;
 
 public class ClawMachine {
     private Coordinate priceLocation;
@@ -21,47 +19,28 @@ public class ClawMachine {
         priceLocation = parseButton(clawString.get(2));
     }
 
-    public Coordinate getPriceLocation() {
-        return priceLocation;
-    }
-
-    public Coordinate getButtonAOffset() {
-        return buttonAOffset;
-    }
-
-    public Coordinate getButtonBOffset() {
-        return buttonBOffset;
-    }
-
     public void trySolveMachine() {
 
-        PriorityQueue<CoordinateCost> pq = new PriorityQueue<>();
-        HashSet<Coordinate> visited = new HashSet<>();
+        double epsilon = 0.000001;
+        double a1 = buttonAOffset.x();
+        double a2 = buttonAOffset.y();
+        double b1 = buttonBOffset.x();
+        double b2 = buttonBOffset.y();
+        double c1 = priceLocation.x();
+        double c2 = priceLocation.y();
 
-        pq.add(new CoordinateCost(new Coordinate(0, 0), 0));
+        double d = a1 * b2 - a2 * b1;
+        double dx = c1 * b2 - c2 * b1;
+        double dy = a1 * c2 - a2 * c1;
 
-        while (!pq.isEmpty()) {
-            CoordinateCost current = pq.poll();
+        double a = dx / d;
+        double b = dy / d;
 
-            if (visited.contains(current.coordinate())) {
-                continue;
-            }
+        long intA = Math.round(a);
+        long intB = Math.round(b);
 
-            visited.add(current.coordinate());
-            if (current.coordinate().equals(priceLocation)) {
-                this.priceSpendings = (long) current.cost();
-                return;
-            }
-
-            CoordinateCost nextA = new CoordinateCost(current.coordinate().plus(buttonAOffset), current.cost() + costA);
-            if (!visited.contains(nextA.coordinate()) && nextA.coordinate().x() <= priceLocation.x() && nextA.coordinate().y() <= priceLocation.y()) {
-                pq.add(nextA);
-            }
-
-            CoordinateCost nextB = new CoordinateCost(current.coordinate().plus(buttonBOffset), current.cost() + costB);
-            if (!visited.contains(nextB.coordinate()) && nextB.coordinate().x() <= priceLocation.x() && nextB.coordinate().y() <= priceLocation.y()) {
-                pq.add(nextB);
-            }
+        if (Math.abs(a - intA) < epsilon && Math.abs(b - intB) < epsilon) {
+            priceSpendings = intA * costA + intB * costB;
         }
     }
 
@@ -81,40 +60,9 @@ public class ClawMachine {
         return priceSpendings;
     }
 
+
     public void trySolveExtendedMachine() {
-        long extender = 10000000000000L;
-        long priceX = priceLocation.x() + extender;
-        long priceY = priceLocation.y() + extender;
-        long ax = buttonAOffset.x();
-        long ay = buttonAOffset.y();
-        long bx = buttonBOffset.x();
-        long by = buttonBOffset.y();
-
-        long gcdX = lcm(lcm(ax, bx), priceX);
-        long gcdY = lcm(lcm(ay, by), priceY);
-        long finalGcd = lcm(gcdX, gcdY);
-        long multiplier = priceLocation.x() / finalGcd;
-        priceLocation = new Coordinate(priceLocation.x() / finalGcd, priceLocation.y() / finalGcd);
-
+        priceLocation = new Coordinate(priceLocation.x() + 10000000000000L, priceLocation.y() + 10000000000000L);
         trySolveMachine();
-        if (priceSpendings != null) {
-            priceSpendings *= multiplier;
-        }
-
-    }
-
-    private long lcm(long number1, long number2) {
-        if (number1 == 0 || number2 == 0) {
-            return 0;
-        }
-        long absNumber1 = Math.abs(number1);
-        long absNumber2 = Math.abs(number2);
-        long absHigherNumber = Math.max(absNumber1, absNumber2);
-        long absLowerNumber = Math.min(absNumber1, absNumber2);
-        long lcm = absHigherNumber;
-        while (lcm % absLowerNumber != 0) {
-            lcm += absHigherNumber;
-        }
-        return lcm;
     }
 }

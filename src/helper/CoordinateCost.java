@@ -1,8 +1,8 @@
-package challenges.year2024.day13;
+package helper;
 
-import helper.Coordinate;
+import java.util.List;
 
-public record CoordinateCost(Coordinate coordinate, int cost) implements Comparable<CoordinateCost> {
+public record CoordinateCost(Coordinate coordinate, int cost, List<Coordinate> history) implements Comparable<CoordinateCost> {
 
     @Override
     public boolean equals(Object obj) {

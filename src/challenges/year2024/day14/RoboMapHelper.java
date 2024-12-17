@@ -60,4 +60,52 @@ public class RoboMapHelper {
 
         return new Coordinate(x, y);
     }
+
+    public int calc2() {
+        double minSd = Double.MAX_VALUE;
+        List<Coordinate> positions = new ArrayList<>();
+        int step = 0;
+        for (int i = 0; i < 10000; i++) {
+            List<Coordinate> endPositions = new ArrayList<>();
+            for (Robo robo : robos) {
+                Coordinate pos = getPositionInMap(robo.getPositionAfterSteps(i));
+                endPositions.add(pos);
+            }
+            double sd = calcStandardDeviation(endPositions);
+            if (sd < minSd) {
+                minSd = sd;
+                positions = endPositions;
+                step = i;
+            }
+        }
+        print(positions);
+        return step;
+    }
+
+    private void print(List<Coordinate> positions) {
+        for (int y = maxY; y >= 0; y--) {
+            String s = "";
+            for (int x = 0; x < maxX; x++) {
+                if (positions.contains(new Coordinate(x, y))) {
+                    s += "@";
+                } else {
+                    s += ".";
+                }
+            }
+            System.out.println(s);
+        }
+    }
+
+    private double calcStandardDeviation(List<Coordinate> endPositions) {
+        int n = endPositions.size();
+
+        double meanX = endPositions.stream().mapToDouble(Coordinate::x).average().orElse(0.0);
+        double varianceX = endPositions.stream().mapToDouble(c -> Math.pow(c.x() - meanX, 2)).sum() / n;
+        double meanY = endPositions.stream().mapToDouble(Coordinate::y).average().orElse(0.0);
+        double varianceY = endPositions.stream().mapToDouble(c -> Math.pow(c.y() - meanY, 2)).sum() / n;
+
+        return Math.sqrt(varianceX + varianceY);
+    }
+
+
 }

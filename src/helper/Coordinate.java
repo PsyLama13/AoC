@@ -65,4 +65,13 @@ public record Coordinate(long x, long y) {
         return new Coordinate(x + o.x(), y + o.y());
     }
 
+    public Coordinate getNeighbourInDirection(Direction direction) {
+        return switch (direction) {
+            case UP -> this.up();
+            case DOWN -> this.down();
+            case LEFT -> this.left();
+            case RIGHT -> this.right();
+        };
+    }
+
 }

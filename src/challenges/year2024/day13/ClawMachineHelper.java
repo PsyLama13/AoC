@@ -37,7 +37,9 @@ public class ClawMachineHelper {
         long counter = 0;
         for (ClawMachine clawMachine : clawMachines) {
             clawMachine.trySolveExtendedMachine();
-            counter += clawMachine.getPriceSpendings();
+            if (clawMachine.isSolvable()) {
+                counter += clawMachine.getPriceSpendings();
+            }
         }
         return counter;
     }
