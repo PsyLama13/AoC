@@ -17,10 +17,10 @@ public class XmasTuple {
 
     public List<XmasTuple> copyWithMs(List<Coordinate> mList) {
         List<XmasTuple> output = new ArrayList<>();
-        for (Coordinate m : mList) {
-            if (m.isNeighbouringTo(x)) {
+        for (Coordinate mCoordinate : mList) {
+            if (mCoordinate.isNeighbouringTo(x)) {
                 XmasTuple temp = new XmasTuple(this.x);
-                temp.m = m;
+                temp.m = mCoordinate;
                 output.add(temp);
             }
         }

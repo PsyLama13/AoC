@@ -15,7 +15,7 @@ public class LightCoordinator {
         }
 
         for(long[] row : lightGrid){
-            Arrays.fill(row, 0l);
+            Arrays.fill(row, 0L);
         }
     }
 

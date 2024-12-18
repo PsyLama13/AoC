@@ -14,8 +14,7 @@ public class BagHelper {
     }
 
     public int calc1() {
-        int count = calcPossibilities();
-        return count;
+        return calcPossibilities();
     }
 
     private int calcPossibilities() {

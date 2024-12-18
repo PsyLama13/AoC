@@ -48,20 +48,18 @@ public class HashCalculator {
         byte[] messageDigest = md.digest(s.getBytes());
         BigInteger no = new BigInteger(1, messageDigest);
 
-        String hashtext = no.toString(16);
-        while (hashtext.length() < 32) {
-            hashtext = "0" + hashtext;
+        StringBuilder hashText = new StringBuilder(no.toString(16));
+        while (hashText.length() < 32) {
+            hashText.insert(0, "0");
         }
-        return hashtext;
+        return hashText.toString();
     }
 
     private boolean isHashValidForNZeroes(String s, int numOfZeroes) {
-        String checker = "";
-        for(int i = 0; i < numOfZeroes; i++){
-            checker += "0";
-        }
+        StringBuilder checker = new StringBuilder();
+        checker.append("0".repeat(Math.max(0, numOfZeroes)));
 
-        if (s.startsWith(checker)) {
+        if (s.startsWith(checker.toString())) {
             Character leadingChar = s.charAt(5);
             try {
                 int num = Integer.parseInt(String.valueOf(leadingChar));

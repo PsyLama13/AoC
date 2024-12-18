@@ -12,6 +12,6 @@ public class SolverD1 {
         List<String> input = Helper.readInput("year2015/d1.txt");
 
         BracketParser bracketParser = new BracketParser(input);
-        System.out.println(bracketParser.getFirstBasementOccurence());
+        System.out.println(bracketParser.getFirstBasementOccurrence());
     }
 }

@@ -10,8 +10,9 @@ public class SolverD14 {
         List<String> input = Helper.readInput("year2024/d14.txt");
         List<String> debug = Helper.readInput("year2024/d14d.txt");
 
-        RoboMapHelper roboMapHelper = new RoboMapHelper(input, 100, 101, 103);
-        //System.out.println(roboMapHelper.calc1());
+        RobotMapHelper roboMapHelper = new RobotMapHelper(input, 100, 101, 103);
+
+        System.out.println(roboMapHelper.calc1());
         System.out.println(roboMapHelper.calc2());
     }
 }

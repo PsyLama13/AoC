@@ -39,11 +39,10 @@ public class BitMazeSolver {
             if (visited.contains(current.coordinate())) {
                 continue;
             }
-            if (current.coordinate().equals(end)) {
-                if (current.stepTime() < minTime) {
-                    minTime = current.stepTime();
-                }
+            if (current.coordinate().equals(end) && current.stepTime() < minTime) {
+                minTime = current.stepTime();
             }
+
             visited.add(current.coordinate());
             List<BitCoordinate> successors = getSuccessors(current);
             for (BitCoordinate successor : successors) {

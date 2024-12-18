@@ -1,6 +1,7 @@
 package challenges.year2020.d5;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardingHelper {
 
@@ -24,29 +25,16 @@ public class BoardingHelper {
     }
 
     public int calc2() {
-        Collections.sort(boardingIds, new Comparator<BoardingId>() {
-            @Override
-            public int compare(BoardingId o1, BoardingId o2) {
-                return Integer.compare(o1.getId(), o2.getId());
-            }
-        });
+        boardingIds.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
         Integer prevId = null;
-        for(BoardingId id : boardingIds){
-            if(prevId != null){
-                if(id.getId()-1 != prevId){
-                 return id.getId() -1;
-                }
+        for (BoardingId id : boardingIds) {
+            if (prevId != null && id.getId() - 1 != prevId) {
+                return id.getId() - 1;
             }
+
 
             prevId = id.getId();
         }
         return 1;
-    }
-
-    public void plotPoints() {
-        String[][] arr = new String[128][8];
-        for (BoardingId id : boardingIds) {
-            arr[id.getRow()][id.getColumn()] = "x";
-        }
     }
 }

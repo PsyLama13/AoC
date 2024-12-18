@@ -62,7 +62,7 @@ public class WareHouse {
         for (int y = 0; y < mapStrings.size(); y++) {
             for (int x = 0; x < mapStrings.get(0).length() * 2; x = x + 2) {
                 Coordinate c1 = new Coordinate(x, y);
-                Coordinate c2 = new Coordinate(x + 1, y);
+                Coordinate c2 = new Coordinate((long) x + 1, y);
                 Character s = mapStrings.get(y).charAt(x / 2);
                 FieldType type = getFieldType(s);
                 if (type.equals(FieldType.ROBOT)) {
@@ -119,6 +119,7 @@ public class WareHouse {
             switch (type) {
                 case WALL -> s.append("#");
                 case OPEN -> s.append(".");
+                case CRATE_LEFT, CRATE_RIGHT, ROBOT -> throw new IllegalStateException();
             }
         }
     }

@@ -1,6 +1,10 @@
 package other;
 
-public class FischliGame {
+import helper.Solver;
+
+import java.util.logging.Level;
+
+public class FischliGame extends Solver {
 
     public static void main(String[] args) {
 
@@ -9,6 +13,6 @@ public class FischliGame {
         Game game = new Game(startline);
         int fishWins = game.play(numOfGames);
         float percent = (float) fishWins / numOfGames;
-        System.out.println(percent * 100);
+        logger.log(Level.INFO, () -> String.valueOf(percent * 100));
     }
 }

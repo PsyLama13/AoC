@@ -1,6 +1,7 @@
 package challenges.year2015.d5;
 
 import java.util.List;
+import java.util.Objects;
 
 public class NiceStringCounter {
     private List<String> strings;
@@ -39,9 +40,9 @@ public class NiceStringCounter {
     private boolean containsDoubleLetter(String string) {
 
         for (int i = 0; i < string.length() - 1; i++) {
-            Character firstChar = string.charAt(i);
-            Character secondChar = string.charAt(i + 1);
-            if (firstChar == secondChar) {
+            char firstChar = string.charAt(i);
+            char secondChar = string.charAt(i + 1);
+            if (Objects.equals(firstChar, secondChar)) {
                 return true;
             }
         }

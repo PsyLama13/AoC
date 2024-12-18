@@ -60,7 +60,6 @@ public class MazeHelper {
         for (State min : minimums) {
             seats.addAll(min.getHistory());
         }
-        //printPath(seats);
         return seats.size();
     }
 
@@ -96,23 +95,6 @@ public class MazeHelper {
             throw new IllegalStateException();
         }
         return 1000;
-    }
-
-    private void printPath(Set<Coordinate> output) {
-        for (int y = 0; y < maxY; y++) {
-            StringBuilder s = new StringBuilder();
-            for (int x = 0; x < maxX; x++) {
-                Coordinate c = new Coordinate(x, y);
-                if (output.contains(c)) {
-                    s.append("O");
-                } else if (map.get(c).equals(FieldType.WALL)) {
-                    s.append("#");
-                } else {
-                    s.append(".");
-                }
-            }
-            System.out.println(s);
-        }
     }
 
     public int calc1() {

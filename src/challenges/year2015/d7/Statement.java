@@ -19,26 +19,26 @@ public class Statement {
         this.outPut = outPut;
         this.fun = fun;
 
-        if(isShiftFun()){
+        if (isShiftFun()) {
             sideInput = Integer.parseInt(inputB.name());
         }
     }
 
-    public Integer calc(Integer a, Integer b){
-        if(isShiftFun()){{
+    public Integer calc(Integer a, Integer b) {
+        if (isShiftFun()) {
             return fun.apply(a, sideInput);
-        }}
+        }
         return fun.apply(a, b);
     }
 
-    private boolean isShiftFun(){
+    private boolean isShiftFun() {
         return fun.equals(ConstructionKit.lShift) || fun.equals(ConstructionKit.rShift);
     }
 
     public boolean canBeCalculated(Map<Variable, Integer> variableToSignalValue) {
         boolean canBeCalculated = variableToSignalValue.containsKey(inputA);
-        if(intputB != null && sideInput == null){
-            canBeCalculated = canBeCalculated & variableToSignalValue.containsKey(intputB);
+        if (intputB != null && sideInput == null) {
+            canBeCalculated = canBeCalculated && variableToSignalValue.containsKey(intputB);
         }
         return canBeCalculated;
     }

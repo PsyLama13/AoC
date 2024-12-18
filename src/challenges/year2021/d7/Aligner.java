@@ -2,20 +2,22 @@ package challenges.year2021.d7;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Aligner {
     List<Integer> positionList = new ArrayList<>();
     int minPos = Integer.MAX_VALUE;
     int maxPos = Integer.MIN_VALUE;
+
     public Aligner(List<String> input) {
         List<String> list = List.of(input.get(0).split(","));
-        for(String s : list){
+        for (String s : list) {
             int i = Integer.parseInt(s);
             positionList.add(i);
-            if(i > maxPos){
+            if (i > maxPos) {
                 maxPos = i;
             }
-            if(i < minPos){
+            if (i < minPos) {
                 minPos = i;
             }
         }
@@ -23,12 +25,12 @@ public class Aligner {
 
     public int getLeastFuel() {
         int minFuel = Integer.MAX_VALUE;
-        for(Integer pos : positionList){
+        for (Integer pos : positionList) {
             int fuelCount = 0;
-            for(Integer posToCheck : positionList){
+            for (Integer posToCheck : positionList) {
                 fuelCount += Math.abs(pos - posToCheck);
             }
-            if(fuelCount < minFuel){
+            if (fuelCount < minFuel) {
                 minFuel = fuelCount;
             }
         }
@@ -37,12 +39,12 @@ public class Aligner {
 
     public int getLeastFuelSecond() {
         int minFuel = Integer.MAX_VALUE;
-        for(int i = minPos ; i < maxPos; i++){
+        for (int i = minPos; i < maxPos; i++) {
             int fuelCount = 0;
-            for(Integer pos : positionList){
+            for (Integer pos : positionList) {
                 fuelCount += calcFuelUsage(pos, i);
             }
-            if(fuelCount < minFuel){
+            if (fuelCount < minFuel) {
                 minFuel = fuelCount;
             }
         }
@@ -50,7 +52,7 @@ public class Aligner {
     }
 
     private int calcFuelUsage(Integer pos, Integer posToCheck) {
-        if(pos == posToCheck){
+        if (Objects.equals(pos, posToCheck)) {
             return 0;
         }
         int smaller = pos < posToCheck ? pos : posToCheck;
@@ -58,7 +60,7 @@ public class Aligner {
 
         int count = 0;
         int output = 0;
-        for(int i = smaller ; i <= bigger; i++){
+        for (int i = smaller; i <= bigger; i++) {
             output += count;
             count++;
         }

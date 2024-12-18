@@ -5,14 +5,14 @@ import helper.Coordinate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoboMapHelper {
+public class RobotMapHelper {
 
     private final List<Robot> robots = new ArrayList<>();
     private final int steps;
     private final int maxX;
     private final int maxY;
 
-    public RoboMapHelper(List<String> input, int steps, int maxX, int maxY) {
+    public RobotMapHelper(List<String> input, int steps, int maxX, int maxY) {
         this.steps = steps;
         this.maxX = maxX;
         this.maxY = maxY;
@@ -84,12 +84,12 @@ public class RoboMapHelper {
 
     private void print(List<Coordinate> positions) {
         for (int y = maxY; y >= 0; y--) {
-            String s = "";
+            StringBuilder s = new StringBuilder();
             for (int x = 0; x < maxX; x++) {
                 if (positions.contains(new Coordinate(x, y))) {
-                    s += "@";
+                    s.append("@");
                 } else {
-                    s += ".";
+                    s.append(".");
                 }
             }
             System.out.println(s);

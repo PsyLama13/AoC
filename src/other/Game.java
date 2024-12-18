@@ -4,15 +4,15 @@ import java.util.*;
 
 public class Game {
 
-    Map<Color, Integer> fishes = new HashMap<>();
+    Map<Color, Integer> fishes = new EnumMap<>(Color.class);
     Set<Color> fisher = new HashSet<>();
     Set<Color> winningFishes = new HashSet<>();
 
     int boatPosition = 0;
     int startOffset;
 
-    private final int FISH_START_POS_DEFAULT = 5;
-    private final int FINISH_LINE = 10;
+    private static final int FISH_START_POS_DEFAULT = 5;
+    private static final int FINISH_LINE = 10;
 
     public Game(int startOffset) {
         this.startOffset = startOffset;
@@ -24,13 +24,13 @@ public class Game {
         fisher.clear();
         winningFishes.clear();
 
-        fishes.put(Color.orange, startPos);
-        fishes.put(Color.pink, startPos);
-        fishes.put(Color.blue, startPos);
-        fishes.put(Color.yellow, startPos);
+        fishes.put(Color.ORANGE, startPos);
+        fishes.put(Color.PINK, startPos);
+        fishes.put(Color.BLUE, startPos);
+        fishes.put(Color.YELLOW, startPos);
 
-        fisher.add(Color.green);
-        fisher.add(Color.red);
+        fisher.add(Color.GREEN);
+        fisher.add(Color.RED);
 
         boatPosition = 0;
     }
@@ -39,8 +39,8 @@ public class Game {
         int numOfFishWins = 0;
         for (int i = 0; i < numOfGames; i++) {
             initGame(startOffset);
-            boolean fishwin = playOneGame();
-            if (fishwin) {
+            boolean fishWin = playOneGame();
+            if (fishWin) {
                 numOfFishWins++;
             }
         }
@@ -50,7 +50,6 @@ public class Game {
     private boolean playOneGame() {
         int counter = 1;
         for (; ; ) {
-            //System.out.println("Round " + counter);
             Color color = Color.rollDice();
             if (fishes.isEmpty()) {
                 return winningFishes.size() > fisher.size();
@@ -80,6 +79,9 @@ public class Game {
             if (smallest == null || smallest.getValue() > entry.getValue()) {
                 smallest = entry;
             }
+        }
+        if(smallest == null){
+            throw new IllegalStateException();
         }
         return smallest.getKey();
     }

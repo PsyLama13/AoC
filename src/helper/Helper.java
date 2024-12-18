@@ -6,13 +6,15 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Helper {
+    private Helper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static List<String> readInput(String location) throws IOException {
 
         String locationPrefix = "src/resources/";
         String content = new String(Files.readAllBytes(Paths.get(locationPrefix + location)));
-        List<String> output = List.of(content.split("\r\n"));
 
-        return output;
+        return List.of(content.split("\r\n"));
     }
 }

@@ -20,13 +20,8 @@ public class BoardingId {
         for (String s : code.split("")) {
             int dif = (max - min) / 2;
             switch (s) {
-                case "F" -> {
-                    max -= dif;
-                }
-                case "B" -> {
-
-                    min += dif;
-                }
+                case "F" -> max -= dif;
+                case "B" -> min += dif;
                 default -> throw new IllegalStateException();
             }
         }
@@ -40,12 +35,8 @@ public class BoardingId {
         for (String s : code.split("")) {
             int diff = (max - min) / 2;
             switch (s) {
-                case "L" -> {
-                    max -= diff;
-                }
-                case "R" -> {
-                    min += diff;
-                }
+                case "L" -> max -= diff;
+                case "R" -> min += diff;
                 default -> throw new IllegalStateException();
             }
         }
