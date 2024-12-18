@@ -80,18 +80,8 @@ public class MazeSolver {
         while (!pq.isEmpty()) {
             MazeKey current = pq.poll();
 
-            if (current.cost > minCost) {
-                continue;
-            }
-
             if (current.coordinate.equals(end)) {
-                if (current.cost < minCost) {
-                    minCost = current.cost;
-                    ends.clear();
-                }
-                if (current.cost == minCost) {
-                    ends.add(current);
-                }
+                handleEnd(current, ends, minCost);
             }
 
             List<MazeKey> successors = getSuccessors(current);
@@ -113,8 +103,18 @@ public class MazeSolver {
         for (MazeKey mk : minimum) {
             output.addAll(mk.history);
         }
-        printPath(output);
+        //printPath(output);
         return output.size();
+    }
+
+    private void handleEnd(MazeKey current, List<MazeKey> ends, int minCost) {
+        if (current.cost < minCost) {
+            minCost = current.cost;
+            ends.clear();
+        }
+        if (current.cost == minCost) {
+            ends.add(current);
+        }
     }
 
     private void printPath(Set<Coordinate> output) {
@@ -141,13 +141,15 @@ public class MazeSolver {
     private List<MazeKey> getSuccessors(MazeKey current) {
         List<MazeKey> output = new ArrayList<>();
         for (Direction direction : Direction.values()) {
-            Coordinate c = current.coordinate.getNeighbourInDirection(direction);
-            if (map.get(c) != null && !map.get(c).equals(FieldType.WALL)) {
-                int cost = current.cost + 1;
-                cost = cost + getTurnCost(direction, current.direction);
-                List<Coordinate> h = new ArrayList<>(current.history);
-                h.add(c);
-                output.add(new MazeKey(c, direction, cost, h));
+            if(!current.direction.isOppositeDirection(direction)){
+                Coordinate c = current.coordinate.getNeighbourInDirection(direction);
+                if (map.get(c) != null && !map.get(c).equals(FieldType.WALL)) {
+                    int cost = current.cost + 1;
+                    cost = cost + getTurnCost(direction, current.direction);
+                    List<Coordinate> h = new ArrayList<>(current.history);
+                    h.add(c);
+                    output.add(new MazeKey(c, direction, cost, h));
+                }
             }
         }
         return output;
@@ -159,30 +161,26 @@ public class MazeSolver {
                 return switch (currentDirection) {
                     case UP -> 0;
                     case DOWN -> 2000;
-                    case LEFT -> 1000;
-                    case RIGHT -> 1000;
+                    case LEFT, RIGHT -> 1000;
                 };
             }
             case DOWN -> {
                 return switch (currentDirection) {
                     case UP -> 2000;
                     case DOWN -> 0;
-                    case LEFT -> 1000;
-                    case RIGHT -> 1000;
+                    case LEFT, RIGHT -> 1000;
                 };
             }
             case LEFT -> {
                 return switch (currentDirection) {
-                    case UP -> 1000;
-                    case DOWN -> 1000;
+                    case UP, DOWN -> 1000;
                     case LEFT -> 0;
                     case RIGHT -> 2000;
                 };
             }
             case RIGHT -> {
                 return switch (currentDirection) {
-                    case UP -> 1000;
-                    case DOWN -> 1000;
+                    case UP, DOWN -> 1000;
                     case LEFT -> 2000;
                     case RIGHT -> 0;
                 };

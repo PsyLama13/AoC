@@ -35,4 +35,13 @@ public class MazeKey implements Comparable<MazeKey> {
     public int compareTo(MazeKey o) {
         return Integer.compare(this.cost, o.cost);
     }
+
+    @Override
+    public String toString() {
+        return "MazeKey{" +
+                "coordinate=" + coordinate +
+                ", direction=" + direction +
+                ", cost=" + cost +
+                '}';
+    }
 }
