@@ -5,11 +5,12 @@ import helper.Direction;
 
 import java.util.Objects;
 
-public class CompositeKey {
+public class MapKey {
     Coordinate coordinate;
     Direction direction;
 
-    public CompositeKey(Coordinate coordinate, Direction direction) {
+
+    public MapKey(Coordinate coordinate, Direction direction) {
         this.coordinate = coordinate;
         this.direction = direction;
     }
@@ -18,7 +19,7 @@ public class CompositeKey {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CompositeKey that = (CompositeKey) o;
+        MapKey that = (MapKey) o;
         return Objects.equals(coordinate, that.coordinate) &&
                 direction == that.direction;
     }

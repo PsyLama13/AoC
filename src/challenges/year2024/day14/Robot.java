@@ -2,12 +2,12 @@ package challenges.year2024.day14;
 
 import helper.Coordinate;
 
-public class Robo {
-    Coordinate startPosition;
-    int velX;
-    int velY;
+public class Robot {
+    private final Coordinate startPosition;
+    private final int velX;
+    private final int velY;
 
-    public Robo(Coordinate startPosition, int velX, int velY) {
+    public Robot(Coordinate startPosition, int velX, int velY) {
         this.startPosition = startPosition;
         this.velX = velX;
         this.velY = velY;

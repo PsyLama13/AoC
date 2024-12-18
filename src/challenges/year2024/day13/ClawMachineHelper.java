@@ -27,7 +27,7 @@ public class ClawMachineHelper {
         for (ClawMachine clawMachine : clawMachines) {
             clawMachine.trySolveMachine();
             if (clawMachine.isSolvable()) {
-                counter += clawMachine.getPriceSpendings() == null ? 0 : clawMachine.getPriceSpendings();
+                counter += clawMachine.getPriceSpending() == null ? 0 : clawMachine.getPriceSpending();
             }
         }
         return counter;
@@ -38,7 +38,7 @@ public class ClawMachineHelper {
         for (ClawMachine clawMachine : clawMachines) {
             clawMachine.trySolveExtendedMachine();
             if (clawMachine.isSolvable()) {
-                counter += clawMachine.getPriceSpendings();
+                counter += clawMachine.getPriceSpending();
             }
         }
         return counter;

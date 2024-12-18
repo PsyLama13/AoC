@@ -7,10 +7,8 @@ import java.util.List;
 
 public class PlantZones {
     private final List<Zone> zones;
-    String key;
 
-    public PlantZones(String key, List<Coordinate> coordinates) {
-        this.key = key;
+    public PlantZones(List<Coordinate> coordinates) {
         zones = computeZones(coordinates);
     }
 
@@ -23,11 +21,10 @@ public class PlantZones {
         List<Coordinate> remainingCoordinates = new ArrayList<>(coordinates);
         while (!remainingCoordinates.isEmpty()) {
             Coordinate startingPoint = remainingCoordinates.get(0);
-            Zone zone = new Zone(key, startingPoint, remainingCoordinates);
+            Zone zone = new Zone(startingPoint, remainingCoordinates);
             output.add(zone);
             remainingCoordinates.removeAll(zone.getCoordinates());
         }
         return output;
     }
-
 }

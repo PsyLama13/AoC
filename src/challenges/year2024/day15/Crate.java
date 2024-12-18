@@ -5,12 +5,28 @@ import helper.Coordinate;
 import java.util.Objects;
 
 public class Crate {
-    Coordinate left;
-    Coordinate right;
+    private Coordinate left;
+    private Coordinate right;
 
     public Crate(Coordinate left, Coordinate right) {
         this.left = left;
         this.right = right;
+    }
+
+    public void setLeft(Coordinate left) {
+        this.left = left;
+    }
+
+    public void setRight(Coordinate right) {
+        this.right = right;
+    }
+
+    public Coordinate getLeft() {
+        return left;
+    }
+
+    public Coordinate getRight() {
+        return right;
     }
 
     @Override

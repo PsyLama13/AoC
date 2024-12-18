@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ReactorHelper {
 
-    List<Report> reportList = new ArrayList<>();
+    private final List<Report> reportList = new ArrayList<>();
     public ReactorHelper(List<String> input) {
         for(String s : input){
             Report report = new Report(s);

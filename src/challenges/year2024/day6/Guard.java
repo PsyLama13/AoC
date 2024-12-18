@@ -9,14 +9,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class Guard {
-    final Coordinate initialPosition;
-    final Direction initialDirection;
-
-    Coordinate position;
-    Direction direction;
-    Set<Coordinate> visited = new HashSet<>();
-    Map<Coordinate, Direction> coordinateDirectionMap = new HashMap<>();
-    Grid grid;
+    private Coordinate position;
+    private Direction direction;
+    private final Coordinate initialPosition;
+    private final Direction initialDirection;
+    private final Set<Coordinate> visited = new HashSet<>();
+    private final Map<Coordinate, Direction> coordinateDirectionMap = new HashMap<>();
+    private Grid grid;
 
     public Guard(Coordinate position, Direction direction) {
         initialPosition = position;
@@ -27,6 +26,9 @@ public class Guard {
         coordinateDirectionMap.put(position, direction);
     }
 
+    public Set<Coordinate> getVisited() {
+        return visited;
+    }
 
     public void run(Grid grid) {
         reset();

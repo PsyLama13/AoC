@@ -5,5 +5,5 @@ public enum FieldType {
     OPEN,
     CRATE_LEFT,
     CRATE_RIGHT,
-    ROBO
+    ROBOT
 }

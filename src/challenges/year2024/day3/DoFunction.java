@@ -9,11 +9,6 @@ public class DoFunction implements MemoryFunction {
     }
 
     @Override
-    public boolean getAvailability() {
-        return true;
-    }
-
-    @Override
     public int getResult() {
         return 0;
     }

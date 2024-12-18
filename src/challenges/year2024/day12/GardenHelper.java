@@ -45,7 +45,7 @@ public class GardenHelper {
 
     private void initPlantZonesList() {
         for (Map.Entry<String, List<Coordinate>> entry : map.entrySet()) {
-            PlantZones plantZones = new PlantZones(entry.getKey(), entry.getValue());
+            PlantZones plantZones = new PlantZones(entry.getValue());
             plantZonesList.add(plantZones);
         }
     }

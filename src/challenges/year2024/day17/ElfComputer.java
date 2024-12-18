@@ -2,7 +2,6 @@ package challenges.year2024.day17;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class ElfComputer {
 
@@ -23,34 +22,6 @@ public class ElfComputer {
         this.regB = elfComputer.regC;
         this.regC = elfComputer.regC;
         this.values = elfComputer.values;
-    }
-
-    public Long getRegB() {
-        return regB;
-    }
-
-    public Long getRegC() {
-        return regC;
-    }
-
-    public List<Integer> getValues() {
-        return values;
-    }
-
-    public void setRegA(Long val) {
-        regA = val;
-    }
-
-    public boolean equals(ElfComputer o) {
-        if (!Objects.equals(regB, o.regB) || !Objects.equals(regC, o.regC) || (values.size() != o.values.size())) {
-            return false;
-        }
-        for (int i = 0; i < values.size(); i++) {
-            if (!Objects.equals(values.get(i), o.values.get(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private List<Integer> parseOpCodes(String input) {
@@ -108,9 +79,10 @@ public class ElfComputer {
                     regC = (regA / (int) Math.pow(2, getCombo(operand)));
                     pointer += 2;
                 }
+                default -> throw new IllegalStateException("Unexpected value: " + opCode);
             }
         } while (pointer < values.size());
-        return text.toString().substring(0, text.length() - 1);
+        return text.substring(0, text.length() - 1);
     }
 
     private Long getCombo(int operand) {
@@ -127,13 +99,5 @@ public class ElfComputer {
             return regC;
         }
         throw new IllegalStateException();
-    }
-
-    public String getCheckString() {
-        StringBuilder output = new StringBuilder();
-        for (int i : values) {
-            output.append(i).append(",");
-        }
-        return output.substring(0, output.length() - 1);
     }
 }

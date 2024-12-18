@@ -3,13 +3,16 @@ package challenges.year2024.day7;
 import java.util.List;
 
 public class Equation {
-
-    Long result;
-    List<Long> inputs;
+    private final Long result;
+    private final List<Long> inputs;
 
     public Equation(Long result, List<Long> inputs) {
         this.result = result;
         this.inputs = inputs;
+    }
+
+    public Long getResult() {
+        return result;
     }
 
     public boolean isSolvable() {
@@ -31,8 +34,8 @@ public class Equation {
             Operation operation = operationList.get(i - 1);
             switch (operation) {
                 case PLUS -> tempResult += nextVal;
-                case MULT -> tempResult *= nextVal;
-                case CONCAT -> tempResult = concatLong(tempResult, nextVal);
+                case MULTIPLICATION -> tempResult *= nextVal;
+                case CONCATENATION -> tempResult = concatLong(tempResult, nextVal);
             }
         }
 

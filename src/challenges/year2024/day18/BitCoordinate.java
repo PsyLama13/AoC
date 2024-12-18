@@ -4,14 +4,7 @@ import helper.Coordinate;
 
 import java.util.Objects;
 
-public class BitCoordinate implements Comparable<BitCoordinate> {
-    private Coordinate coordinate;
-    private int stepTime;
-
-    public BitCoordinate(Coordinate coordinate, int stepTime) {
-        this.coordinate = coordinate;
-        this.stepTime = stepTime;
-    }
+public record BitCoordinate(Coordinate coordinate, int stepTime) implements Comparable<BitCoordinate> {
 
     @Override
     public boolean equals(Object o) {
@@ -23,14 +16,6 @@ public class BitCoordinate implements Comparable<BitCoordinate> {
     @Override
     public int hashCode() {
         return coordinate.hashCode();
-    }
-
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public int getStepTime() {
-        return stepTime;
     }
 
     @Override

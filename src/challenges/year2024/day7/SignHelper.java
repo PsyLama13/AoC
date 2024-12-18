@@ -25,11 +25,11 @@ public class SignHelper {
         generatePermutationsRecursively(i - 1, current, results);
         current.remove(current.size() - 1);
 
-        current.add(Operation.MULT);
+        current.add(Operation.MULTIPLICATION);
         generatePermutationsRecursively(i - 1, current, results);
         current.remove(current.size() - 1);
 
-        current.add(Operation.CONCAT);
+        current.add(Operation.CONCATENATION);
         generatePermutationsRecursively(i - 1, current, results);
         current.remove(current.size() - 1);
     }

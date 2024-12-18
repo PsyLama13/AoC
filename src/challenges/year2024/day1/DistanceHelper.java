@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 public class DistanceHelper {
 
-    List<Integer> l1 = new ArrayList<>();
-    List<Integer> l2 = new ArrayList<>();
+    private List<Integer> l1 = new ArrayList<>();
+    private List<Integer> l2 = new ArrayList<>();
 
     public DistanceHelper(List<String> input) {
         for (String s : input) {

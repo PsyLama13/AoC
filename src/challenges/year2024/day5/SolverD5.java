@@ -10,8 +10,8 @@ public class SolverD5 {
         List<String> input = Helper.readInput("year2024/d5.txt");
         List<String> debug = Helper.readInput("year2024/d5d.txt");
 
-        SafetyProtocolHelper safeteyProtocolHelper = new SafetyProtocolHelper(input);
+        SafetyProtocolHelper safetyProtocolHelper = new SafetyProtocolHelper(input);
 
-        safeteyProtocolHelper.calc1And2();
+        safetyProtocolHelper.calc1And2();
     }
 }

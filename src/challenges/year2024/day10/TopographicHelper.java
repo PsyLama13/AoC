@@ -5,9 +5,9 @@ import helper.Coordinate;
 import java.util.*;
 
 public class TopographicHelper {
-    Map<Coordinate, Integer> coordinateToHeightMap = new HashMap<>();
-    Set<Coordinate> starts = new HashSet<>();
-    List<TrailHead> trailHeads = new ArrayList<>();
+    private final Map<Coordinate, Integer> coordinateToHeightMap = new HashMap<>();
+    private final Set<Coordinate> starts = new HashSet<>();
+    private final List<TrailHead> trailHeads = new ArrayList<>();
 
     public TopographicHelper(List<String> input) {
         initMap(input);

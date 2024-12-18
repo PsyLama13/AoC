@@ -6,12 +6,12 @@ import helper.Direction;
 import java.util.*;
 
 public class WareHouse {
-    Map<Coordinate, FieldType> map = new HashMap<>();
-    CratesCache cratesCache = new CratesCache();
-    List<Direction> moves = new ArrayList<>();
-    Coordinate roboLocation;
-    int maxX;
-    int maxY;
+    private Map<Coordinate, FieldType> map = new HashMap<>();
+    private final CratesCache cratesCache = new CratesCache();
+    private List<Direction> moves = new ArrayList<>();
+    private Coordinate robotLocation;
+    private final int maxX;
+    private final int maxY;
 
     public WareHouse(List<String> input) {
         List<String> mapStrings = new ArrayList<>();
@@ -65,8 +65,8 @@ public class WareHouse {
                 Coordinate c2 = new Coordinate(x + 1, y);
                 Character s = mapStrings.get(y).charAt(x / 2);
                 FieldType type = getFieldType(s);
-                if (type.equals(FieldType.ROBO)) {
-                    roboLocation = c1;
+                if (type.equals(FieldType.ROBOT)) {
+                    robotLocation = c1;
                     type = FieldType.OPEN;
                 }
                 if (type.equals(FieldType.CRATE_LEFT)) {
@@ -85,7 +85,7 @@ public class WareHouse {
             case '#' -> FieldType.WALL;
             case '.' -> FieldType.OPEN;
             case 'O' -> FieldType.CRATE_LEFT;
-            case '@' -> FieldType.ROBO;
+            case '@' -> FieldType.ROBOT;
             default -> throw new IllegalStateException("Unexpected value: " + s);
         };
     }
@@ -95,82 +95,65 @@ public class WareHouse {
             StringBuilder s = new StringBuilder();
             for (int x = 0; x < maxX; x++) {
                 Coordinate c = new Coordinate(x, y);
-                if (c.equals(roboLocation)) {
-                    s.append("@");
-                    continue;
-                }
-                Direction d = cratesCache.isCrate(c);
-                if (d != null) {
-                    if (d.equals(Direction.LEFT)) {
-                        s.append("[");
-                    }
-                    if (d.equals(Direction.RIGHT)) {
-                        s.append("]");
-                    }
-                } else {
-                    FieldType type = map.get(c);
-                    switch (type) {
-                        case WALL -> s.append("#");
-                        case OPEN -> s.append(".");
-                    }
-                }
-
+                handleCoordinate(c, s);
             }
             System.out.println(s);
+        }
+    }
+
+    private void handleCoordinate(Coordinate c, StringBuilder s) {
+        if (c.equals(robotLocation)) {
+            s.append("@");
+            return;
+        }
+        Direction d = cratesCache.isCrate(c);
+        if (d != null) {
+            if (d.equals(Direction.LEFT)) {
+                s.append("[");
+            }
+            if (d.equals(Direction.RIGHT)) {
+                s.append("]");
+            }
+        } else {
+            FieldType type = map.get(c);
+            switch (type) {
+                case WALL -> s.append("#");
+                case OPEN -> s.append(".");
+            }
         }
     }
 
     public void runCommands() {
         for (Direction direction : moves) {
             runCommand(direction);
-            /*
-            String dir = getDirectionString(direction);
-            String s = "Move " + dir + ":";
-            System.out.println(s);
-            printMap();
-            System.out.println();
-
-             */
         }
     }
 
     private void runCommand(Direction direction) {
-        Coordinate next = roboLocation.getNeighbourInDirection(direction);
+        Coordinate next = robotLocation.getNeighbourInDirection(direction);
         if (!map.get(next).equals(FieldType.WALL)) {
             if (cratesCache.isCrate(next) != null) {
                 // handle crates
                 handleCrates(direction);
             } else {
                 // else open field, we can just walk
-                roboLocation = next;
+                robotLocation = next;
             }
         }
     }
 
     private void handleCrates(Direction direction) {
-        Set<Crate> cratesToMove = cratesCache.getCratesToMove(direction, roboLocation);
+        Set<Crate> cratesToMove = cratesCache.getCratesToMove(direction, robotLocation);
         if (cratesCache.isFreeToMove(cratesToMove, direction, map)) {
             cratesCache.moveCratesInDirection(cratesToMove, direction);
-            roboLocation = roboLocation.getNeighbourInDirection(direction);
+            robotLocation = robotLocation.getNeighbourInDirection(direction);
         }
-    }
-
-    private String getDirectionString(Direction direction) {
-        return switch (direction) {
-            case UP -> "^";
-            case DOWN -> "v";
-            case LEFT -> "<";
-            case RIGHT -> ">";
-        };
     }
 
     public int calc2() {
         int counter = 0;
         for (Crate crate : cratesCache.getAllCrates()) {
-            int yVal = Math.toIntExact(Math.min(crate.left.y(), maxY - crate.left.y()));
-            int xVal = Math.toIntExact(Math.min(crate.left.x(), maxX - crate.right.x()));
-            //counter += 100*yVal + xVal;
-            counter += 100*crate.left.y() + crate.left.x();
+            counter += (int) (100 * crate.getLeft().y() + crate.getLeft().x());
         }
         return counter;
     }

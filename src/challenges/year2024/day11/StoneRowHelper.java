@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class StoneRowHelper {
-    List<Long> numbers = new ArrayList<>();
+    private final List<Long> numbers = new ArrayList<>();
     private static final Map<String, Long> cache = new HashMap<>();
 
     public StoneRowHelper(List<String> debug) {

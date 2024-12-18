@@ -1,6 +1,5 @@
-package challenges.year2024.day16.sub;
+package challenges.year2024.day16;
 
-import challenges.year2024.day16.FieldType;
 import helper.Coordinate;
 import helper.Direction;
 
@@ -44,42 +43,43 @@ public class MazeHelper {
         List<State> ends = new ArrayList<>();
         while (!pq.isEmpty()) {
             State current = pq.poll();
-            if (current.coordinate.equals(end)) {
+            if (current.getCoordinate().equals(end)) {
                 ends.add(current);
             }
-            visited.add(new MapKey(current.coordinate, current.direction));
+            visited.add(new MapKey(current.getCoordinate(), current.getDirection()));
             List<State> successors = getSuccessors(current);
-            for(State successor : successors){
-                MapKey successorKey = new MapKey(successor.coordinate, successor.direction);
-                if(!visited.contains(successorKey)){
+            for (State successor : successors) {
+                MapKey successorKey = new MapKey(successor.getCoordinate(), successor.getDirection());
+                if (!visited.contains(successorKey)) {
                     pq.add(successor);
-                }else{
                 }
-
             }
         }
-        List<State> minimums = getMins(ends);
+        List<State> minimums = getMinimumEndPaths(ends);
         Set<Coordinate> seats = new HashSet<>();
-        for(State min : minimums){
-            seats.addAll(min.history);
+        for (State min : minimums) {
+            seats.addAll(min.getHistory());
         }
         //printPath(seats);
         return seats.size();
     }
 
-    private List<State> getMins(List<State> ends) {
-        Integer min = ends.stream().map(i->i.cost).min(Integer::compareTo).get();
-        return ends.stream().filter(i->i.cost==min).toList();
+    private List<State> getMinimumEndPaths(List<State> ends) {
+        Optional<Integer> minimumCost = ends.stream().map(State::getCost).min(Integer::compareTo);
+        if (minimumCost.isPresent()) {
+            return ends.stream().filter(i -> i.getCost() == minimumCost.get()).toList();
+        }
+        throw new IllegalStateException();
     }
 
-    private List<State> getSuccessors(State state){
+    private List<State> getSuccessors(State state) {
         List<State> output = new ArrayList<>();
-        for(Direction direction : Direction.values()){
-            if(!state.direction.isOppositeDirection(direction)){
-                Coordinate next = state.coordinate.getNeighbourInDirection(direction);
-                if(map.containsKey(next) && !map.get(next).equals(FieldType.WALL)){
-                    int newCost = state.cost + 1 + getDirectionCost(state.direction, direction);
-                    List<Coordinate> newHistory = new ArrayList<>(state.history);
+        for (Direction direction : Direction.values()) {
+            if (!state.getDirection().isOppositeDirection(direction)) {
+                Coordinate next = state.getCoordinate().getNeighbourInDirection(direction);
+                if (map.containsKey(next) && !map.get(next).equals(FieldType.WALL)) {
+                    int newCost = state.getCost() + 1 + getDirectionCost(state.getDirection(), direction);
+                    List<Coordinate> newHistory = new ArrayList<>(state.getHistory());
                     newHistory.add(next);
                     output.add(new State(next, direction, newCost, newHistory));
                 }
@@ -89,10 +89,10 @@ public class MazeHelper {
     }
 
     private int getDirectionCost(Direction currentDirection, Direction newDirection) {
-        if(currentDirection.equals(newDirection)){
+        if (currentDirection.equals(newDirection)) {
             return 0;
         }
-        if(currentDirection.isOppositeDirection(newDirection)){
+        if (currentDirection.isOppositeDirection(newDirection)) {
             throw new IllegalStateException();
         }
         return 1000;
@@ -122,14 +122,14 @@ public class MazeHelper {
         pq.add(starter);
         while (!pq.isEmpty()) {
             State current = pq.poll();
-            if (current.coordinate.equals(end)) {
-                return current.cost;
+            if (current.getCoordinate().equals(end)) {
+                return current.getCost();
             }
-            visited.add(new MapKey(current.coordinate, current.direction));
+            visited.add(new MapKey(current.getCoordinate(), current.getDirection()));
             List<State> successors = getSuccessors(current);
-            for(State successor : successors){
-                MapKey successorKey = new MapKey(successor.coordinate, successor.direction);
-                if(!visited.contains(successorKey)){
+            for (State successor : successors) {
+                MapKey successorKey = new MapKey(successor.getCoordinate(), successor.getDirection());
+                if (!visited.contains(successorKey)) {
                     pq.add(successor);
                 }
             }

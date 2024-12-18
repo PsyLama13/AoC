@@ -12,7 +12,7 @@ public class SolverD13 {
 
         ClawMachineHelper clawMachineHelper = new ClawMachineHelper(input);
 
-        //System.out.println(clawMachineHelper.calc1());
+        System.out.println(clawMachineHelper.calc1());
         System.out.println(clawMachineHelper.calc2());
 
     }

@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SafetyProtocolHelper {
-
-    Map<Integer, List<Integer>> safetyRules = new HashMap<>();
-    List<List<Integer>> orderList = new ArrayList<>();
+    private final Map<Integer, List<Integer>> safetyRules = new HashMap<>();
+    private final List<List<Integer>> orderList = new ArrayList<>();
 
     public SafetyProtocolHelper(List<String> input) {
         boolean ruleBreak = false;
@@ -31,7 +30,6 @@ public class SafetyProtocolHelper {
                     safetyRules.put(num1, List.of(num2));
                 }
 
-
             } else {
                 String[] splitter = string.split(",");
                 List<Integer> order = new ArrayList<>();
@@ -41,7 +39,6 @@ public class SafetyProtocolHelper {
                 }
                 orderList.add(order);
             }
-
         }
     }
 
@@ -73,13 +70,14 @@ public class SafetyProtocolHelper {
     private ArrayList<Integer> arrangeCorrectly(ArrayList<Integer> input) {
         ArrayList<Integer> output = new ArrayList<>(input);
         Coordinate c = getWrongNumberTuple(input);
+        assert c != null;
         insertNumberCorrectly(c.x(), output);
 
         return output;
     }
 
     private void insertNumberCorrectly(long num, ArrayList<Integer> list) {
-        List<Integer> beforeList = safetyRules.get(num);
+        List<Integer> beforeList = safetyRules.get((int)num);
         int maxIndex = Integer.MAX_VALUE;
         for (int n : beforeList) {
             int index = list.indexOf(n);
@@ -87,7 +85,7 @@ public class SafetyProtocolHelper {
                 maxIndex = index;
             }
         }
-        int numIndex = list.indexOf(num);
+        int numIndex = list.indexOf((int)num);
         list.remove(numIndex);
         list.add(maxIndex, (int)num);
 

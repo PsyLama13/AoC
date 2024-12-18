@@ -5,13 +5,11 @@ import helper.Coordinate;
 import java.util.*;
 
 public class WordGrid {
-    Map<Coordinate, String> wordMap = new HashMap<>();
-    int maxY;
-    int maxX;
+    private final Map<Coordinate, String> wordMap = new HashMap<>();
 
     public WordGrid(List<String> input) {
-        maxY = input.size();
-        maxX = input.get(0).length();
+        int maxY = input.size();
+        int maxX = input.get(0).length();
         for (int y = 0; y < maxY; y++) {
             for (int x = 0; x < maxX; x++) {
                 Coordinate coordinate = new Coordinate(x, y);

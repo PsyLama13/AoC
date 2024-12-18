@@ -7,14 +7,12 @@ import java.util.*;
 
 public class Zone {
     private final Set<Coordinate> coordinates = new HashSet<>();
-    private final String key;
     private int minX;
     private int maxX;
     private int minY;
     private int maxY;
 
-    public Zone(String key, Coordinate startingPoint, List<Coordinate> remainingCoordinates) {
-        this.key = key;
+    public Zone(Coordinate startingPoint, List<Coordinate> remainingCoordinates) {
         fillRecursively(startingPoint, remainingCoordinates);
         initMinMaxValues();
     }
@@ -64,13 +62,12 @@ public class Zone {
     private int getLines() {
         int counter = 0;
         for (Direction direction : Direction.values()) {
-            //counter += getLinesInDirection(direction);
-            counter += asdf(direction);
+            counter += getLineAmount(direction);
         }
         return counter;
     }
 
-    private int asdf(Direction direction) {
+    private int getLineAmount(Direction direction) {
         int counter = 0;
         Coordinate current = getStartCoordinate(direction);
         boolean isInside = false;
@@ -134,39 +131,25 @@ public class Zone {
         Coordinate end = getEndCoordinate(direction);
 
         return switch (direction) {
-            case UP -> current.x() >= end.x() && current.y() >= end.y();
+            case UP, LEFT -> current.x() >= end.x() && current.y() >= end.y();
             case DOWN -> current.x() >= end.x() && current.y() <= end.y();
-            case LEFT -> current.x() >= end.x() && current.y() >= end.y();
             case RIGHT -> current.x() <= end.x() && current.y() <= end.y();
         };
     }
 
     private Coordinate getEndCoordinate(Direction direction) {
         return switch (direction) {
-            case UP -> new Coordinate(maxX, maxY);
+            case UP, LEFT -> new Coordinate(maxX, maxY);
             case DOWN -> new Coordinate(maxX, minY);
-            case LEFT -> new Coordinate(maxX, maxY);
             case RIGHT -> new Coordinate(minX, maxY);
         };
     }
 
     private Coordinate getStartCoordinate(Direction direction) {
         return switch (direction) {
-            case UP -> new Coordinate(minX, minY);
+            case UP, LEFT -> new Coordinate(minX, minY);
             case DOWN -> new Coordinate(minX, maxY);
-            case LEFT -> new Coordinate(minX, minY);
             case RIGHT -> new Coordinate(maxX, minY);
-        };
-    }
-
-
-    private int getLinesInDirection(Direction direction) {
-
-        return switch (direction) {
-            case UP -> getTopLines(minX, maxX, minY, maxY);
-            case DOWN -> getBotLines(minX, maxX, minY, maxY);
-            case LEFT -> getLeftLines(minX, maxX, minY, maxY);
-            case RIGHT -> getRightLines(minX, maxX, minY, maxY);
         };
     }
 

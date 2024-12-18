@@ -7,10 +7,10 @@ import java.util.List;
 
 public class RoboMapHelper {
 
-    List<Robo> robos = new ArrayList<>();
-    int steps;
-    int maxX;
-    int maxY;
+    private final List<Robot> robots = new ArrayList<>();
+    private final int steps;
+    private final int maxX;
+    private final int maxY;
 
     public RoboMapHelper(List<String> input, int steps, int maxX, int maxY) {
         this.steps = steps;
@@ -22,15 +22,15 @@ public class RoboMapHelper {
             int py = Integer.parseInt(split[0].split("=")[1].split(",")[1]);
             int vx = Integer.parseInt(split[1].split("=")[1].split(",")[0]);
             int vy = Integer.parseInt(split[1].split("=")[1].split(",")[1]);
-            Robo robo = new Robo(new Coordinate(px, py), vx, vy);
-            robos.add(robo);
+            Robot robot = new Robot(new Coordinate(px, py), vx, vy);
+            robots.add(robot);
         }
     }
 
     public long calc1() {
         List<Coordinate> endPositions = new ArrayList<>();
-        for (Robo robo : robos) {
-            Coordinate pos = getPositionInMap(robo.getPositionAfterSteps(steps));
+        for (Robot robot : robots) {
+            Coordinate pos = getPositionInMap(robot.getPositionAfterSteps(steps));
             endPositions.add(pos);
         }
         return calcSafetyFactor(endPositions);
@@ -67,8 +67,8 @@ public class RoboMapHelper {
         int step = 0;
         for (int i = 0; i < 10000; i++) {
             List<Coordinate> endPositions = new ArrayList<>();
-            for (Robo robo : robos) {
-                Coordinate pos = getPositionInMap(robo.getPositionAfterSteps(i));
+            for (Robot robot : robots) {
+                Coordinate pos = getPositionInMap(robot.getPositionAfterSteps(i));
                 endPositions.add(pos);
             }
             double sd = calcStandardDeviation(endPositions);
@@ -106,6 +106,4 @@ public class RoboMapHelper {
 
         return Math.sqrt(varianceX + varianceY);
     }
-
-
 }

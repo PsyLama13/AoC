@@ -12,7 +12,6 @@ public class SolverD9 {
 
         main1(debug.get(0)); // 6366665108136
         main2(debug.get(0)); // 6398065450842
-
     }
 
     static void main1(String input) {

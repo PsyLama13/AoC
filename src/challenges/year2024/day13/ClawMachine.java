@@ -6,12 +6,9 @@ import java.util.List;
 
 public class ClawMachine {
     private Coordinate priceLocation;
-    private Coordinate buttonAOffset;
-    private Coordinate buttonBOffset;
-    private int costA = 3;
-    private int costB = 1;
-    private Long priceSpendings;
-
+    private final Coordinate buttonAOffset;
+    private final Coordinate buttonBOffset;
+    private Long priceSpending;
 
     public ClawMachine(List<String> clawString) {
         buttonAOffset = parseButton(clawString.get(0));
@@ -40,7 +37,9 @@ public class ClawMachine {
         long intB = Math.round(b);
 
         if (Math.abs(a - intA) < epsilon && Math.abs(b - intB) < epsilon) {
-            priceSpendings = intA * costA + intB * costB;
+            int costA = 3;
+            int costB = 1;
+            priceSpending = intA * costA + intB * costB;
         }
     }
 
@@ -53,11 +52,11 @@ public class ClawMachine {
     }
 
     public boolean isSolvable() {
-        return priceSpendings != null;
+        return priceSpending != null;
     }
 
-    public Long getPriceSpendings() {
-        return priceSpendings;
+    public Long getPriceSpending() {
+        return priceSpending;
     }
 
 

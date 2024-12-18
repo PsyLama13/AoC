@@ -26,7 +26,7 @@ public class Calibrator {
         long count = 0;
         for(Equation equation : equations){
             if(equation.isSolvable()){
-                count += equation.result;
+                count += equation.getResult();
             }
         }
         return count;

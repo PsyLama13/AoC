@@ -6,9 +6,9 @@ import java.util.*;
 
 public class AntennaHelper {
 
-    Map<String, List<Coordinate>> map = new HashMap<>();
-    int maxX;
-    int maxY;
+    private final Map<String, List<Coordinate>> map = new HashMap<>();
+    private final int maxX;
+    private final int maxY;
 
     public AntennaHelper(List<String> input) {
         maxX = input.get(0).length();
@@ -17,14 +17,10 @@ public class AntennaHelper {
             for (int x = 0; x < input.get(0).length(); x++) {
                 String str = String.valueOf(input.get(y).charAt(x));
                 if (!str.equals(".")) {
-                    final int fx = x;
-                    final int fy = y;
-                    map.computeIfAbsent(str, k -> new ArrayList<>()).add(new Coordinate(fx, fy));
+                    map.computeIfAbsent(str, k -> new ArrayList<>()).add(new Coordinate(x, y));
                 }
             }
         }
-
-
     }
 
     public int calc1() {
@@ -41,9 +37,9 @@ public class AntennaHelper {
     private List<NodePair> calculateNodePairs(List<Coordinate> set) {
         List<NodePair> output = new ArrayList<>();
 
-        for(int i  = 0; i < set.size(); i++){
+        for (int i = 0; i < set.size(); i++) {
             Coordinate first = set.get(i);
-            for(int j = i+1; j < set.size(); j++){
+            for (int j = i + 1; j < set.size(); j++) {
                 Coordinate second = set.get(j);
                 output.add(new NodePair(first, second, maxX, maxY));
             }

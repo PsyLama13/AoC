@@ -8,11 +8,6 @@ public class DontFunction implements MemoryFunction {
     }
 
     @Override
-    public boolean getAvailability() {
-        return false;
-    }
-
-    @Override
     public int getResult() {
         return 0;
     }

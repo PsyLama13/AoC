@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Report {
 
-    List<Integer> levels = new ArrayList<>();
+    private List<Integer> levels = new ArrayList<>();
 
     public Report(String s) {
         List<String> numStrings = List.of(s.split(" "));

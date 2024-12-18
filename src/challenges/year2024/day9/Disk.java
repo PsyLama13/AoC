@@ -1,7 +1,6 @@
 package challenges.year2024.day9;
 
 public class Disk {
-
     int[] diskList;
 
     public Disk(String input) {

@@ -1,4 +1,4 @@
-package challenges.year2024.day16.sub;
+package challenges.year2024.day16;
 
 import helper.Coordinate;
 import helper.Direction;
@@ -7,16 +7,32 @@ import java.util.List;
 import java.util.Objects;
 
 public class State implements Comparable<State> {
-    Coordinate coordinate;
-    Direction direction;
-    int cost;
-    List<Coordinate> history;
+    private final Coordinate coordinate;
+    private final Direction direction;
+    private final int cost;
+    private final List<Coordinate> history;
 
     public State(Coordinate coordinate, Direction direction, int cost, List<Coordinate> history) {
         this.coordinate = coordinate;
         this.direction = direction;
         this.cost = cost;
         this.history = history;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public List<Coordinate> getHistory() {
+        return history;
     }
 
     @Override

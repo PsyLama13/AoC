@@ -2,15 +2,17 @@ package challenges.year2024.day8;
 
 import helper.Coordinate;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class NodePair {
     private final Coordinate p1;
     private final Coordinate p2;
     private final int maxX;
     private final int maxY;
-    int dx;
-    int dy;
+    private final int dx;
+    private final int dy;
     private final Set<Coordinate> antiNodes = new HashSet<>();
     private final Set<Coordinate> fullAntiNodes = new HashSet<>();
 
@@ -33,7 +35,7 @@ public class NodePair {
 
     private void calcDownwards() {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            Coordinate c = new Coordinate(p1.x() - i * dx, p1.y() - i * dy);
+            Coordinate c = new Coordinate(p1.x() - (long) i * dx, p1.y() - (long) i * dy);
             if (isOnMap(c)) {
                 fullAntiNodes.add(c);
             } else {
@@ -44,7 +46,7 @@ public class NodePair {
 
     private void calcUpwards() {
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            Coordinate c = new Coordinate(p2.x() + i * dx, p2.y() + i * dy);
+            Coordinate c = new Coordinate(p2.x() + (long) i * dx, p2.y() + (long) i * dy);
             if (isOnMap(c)) {
                 fullAntiNodes.add(c);
             } else {
@@ -74,6 +76,13 @@ public class NodePair {
 
     public Set<Coordinate> getFullAntiNodes() {
         return fullAntiNodes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NodePair nodePair)) return false;
+        return p1.equals(nodePair.p1) && p2.equals(nodePair.p2);
     }
 
     @Override

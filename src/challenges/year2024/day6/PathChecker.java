@@ -6,8 +6,8 @@ import helper.Direction;
 import java.util.List;
 
 public class PathChecker {
-    Guard guard;
-    Grid grid;
+    private Guard guard;
+    private final Grid grid;
 
     public PathChecker(List<String> input) {
         int maxX = input.get(0).length();
@@ -40,7 +40,7 @@ public class PathChecker {
     }
 
     public int calc1() {
-        return guard.visited.size();
+        return guard.getVisited().size();
     }
 
     public int calc2() {

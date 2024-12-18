@@ -8,9 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class XmasTuple {
-
-    Coordinate x;
-    Coordinate m;
+    private final Coordinate x;
+    private Coordinate m;
 
     public XmasTuple(Coordinate firstCoordinate) {
         this.x = firstCoordinate;
