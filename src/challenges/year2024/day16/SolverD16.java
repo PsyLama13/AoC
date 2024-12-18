@@ -11,8 +11,8 @@ public class SolverD16 {
         List<String> debug = Helper.readInput("year2024/d16d.txt");
 
 
-        MazeHelper mh = new MazeHelper(debug);
-        System.out.println(mh.calc2());
+        //MazeHelper mh = new MazeHelper(debug);
+        //System.out.println(mh.calc2());
 
 
         //MazeSolver mazeSolver = new MazeSolver(debug);

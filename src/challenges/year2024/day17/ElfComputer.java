@@ -18,11 +18,11 @@ public class ElfComputer {
         values = parseOpCodes(debug.get(4));
     }
 
-    public ElfComputer(Long regA, Long regB, Long regC, List<Integer> values) {
+    public ElfComputer(Long regA, ElfComputer elfComputer) {
         this.regA = regA;
-        this.regB = regB;
-        this.regC = regC;
-        this.values = values;
+        this.regB = elfComputer.regC;
+        this.regC = elfComputer.regC;
+        this.values = elfComputer.values;
     }
 
     public Long getRegB() {
@@ -115,7 +115,7 @@ public class ElfComputer {
 
     private Long getCombo(int operand) {
         if (operand <= 3) {
-            return (long)operand;
+            return (long) operand;
         }
         if (operand == 4L) {
             return regA;

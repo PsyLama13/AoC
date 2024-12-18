@@ -1,8 +1,6 @@
 package helper;
 
-import java.util.List;
-
-public record CoordinateCost(Coordinate coordinate, int cost, List<Coordinate> history) implements Comparable<CoordinateCost> {
+public record CoordinateCost(Coordinate coordinate, int cost) implements Comparable<CoordinateCost> {
 
     @Override
     public boolean equals(Object obj) {
