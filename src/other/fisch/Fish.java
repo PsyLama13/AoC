@@ -1,4 +1,4 @@
-package other;
+package other.fisch;
 
 public class Fish {
     boolean caught;

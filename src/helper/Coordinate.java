@@ -1,5 +1,8 @@
 package helper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public record Coordinate(long x, long y) {
     // top left is 0,0
 
@@ -74,4 +77,18 @@ public record Coordinate(long x, long y) {
         };
     }
 
+    public List<Coordinate> getNeighbours() {
+        return List.of(this.up(), this.down(), this.right(), this.left());
+    }
+
+    public List<Coordinate> getNeighboursInDistance(int distance) {
+        List<Coordinate> neighbours = new ArrayList<>();
+        for (int i = 0; i <= distance; i++) {
+            neighbours.add(new Coordinate(x + i, y - distance + i));
+            neighbours.add(new Coordinate(x + distance - i, y + i));
+            neighbours.add(new Coordinate(x - i, y + distance - i));
+            neighbours.add(new Coordinate(x - distance + i, y - i));
+        }
+        return neighbours;
+    }
 }

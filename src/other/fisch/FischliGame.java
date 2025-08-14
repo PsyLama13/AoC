@@ -1,4 +1,4 @@
-package other;
+package other.fisch;
 
 import helper.Solver;
 
@@ -8,8 +8,8 @@ public class FischliGame extends Solver {
 
     public static void main(String[] args) {
 
-        int startline = 5;
-        int numOfGames = 10000;
+        int startline = 6;
+        int numOfGames = 100000;
         Game game = new Game(startline);
         int fishWins = game.play(numOfGames);
         float percent = (float) fishWins / numOfGames;

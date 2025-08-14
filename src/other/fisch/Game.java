@@ -1,4 +1,4 @@
-package other;
+package other.fisch;
 
 import java.util.*;
 
