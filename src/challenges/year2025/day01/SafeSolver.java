@@ -17,31 +17,27 @@ public class SafeSolver {
         }
     }
 
-    public Integer solve1(){
-        for(Command command : commandList){
+    public Integer solve1() {
+        for (Command command : commandList) {
             applyCommand(command);
-            applyZeroRound(command);
+            applyZeroRound();
         }
 
         return zerorounds;
     }
 
-    private void applyZeroRound(Command command) {
-        if(currentValue == 0){
-            zerorounds ++;
+    private void applyZeroRound() {
+        if (currentValue == 0) {
+            zerorounds++;
         }
     }
 
     private void applyCommand(Command command) {
-        switch (command.rotation()){
-            case LEFT -> {
-                currentValue -= command.value();
-            }
-            case RIGHT -> {
-                currentValue += command.value();
-            }
+        switch (command.rotation()) {
+            case LEFT -> currentValue -= command.value();
+            case RIGHT -> currentValue += command.value();
+            default -> throw new IllegalStateException("Unexpected value: " + command.rotation());
         }
-
         handleOverflow();
     }
 
@@ -51,7 +47,7 @@ public class SafeSolver {
 
     public Integer solve2() {
 
-        for(Command command : commandList){
+        for (Command command : commandList) {
             handleZeroTurnOvers(command);
             applyCommand(command);
             printCommand(command);
@@ -61,7 +57,7 @@ public class SafeSolver {
     }
 
     private void printCommand(Command command) {
-        IO.println(currentValue +" after " + command.rotation().toString() + command.value() + ": zeros are " + zerorounds);
+        IO.println(currentValue + " after " + command.rotation().toString() + command.value() + ": zeros are " + zerorounds);
     }
 
     private void handleZeroTurnOvers(Command command) {
