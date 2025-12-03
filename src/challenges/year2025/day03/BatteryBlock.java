@@ -11,7 +11,7 @@ public class BatteryBlock {
         }
     }
 
-    public Long findTotalestJoltage(int numberLength) {
-        return batteryBanks.stream().mapToLong(batterybank -> batterybank.findHigherestJoltageOutput(numberLength)).sum();
+    public Long findTotalJoltage(int numberLength) {
+        return batteryBanks.stream().mapToLong(batterybank -> batterybank.findHighestJoltage(numberLength)).sum();
     }
 }

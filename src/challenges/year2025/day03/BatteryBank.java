@@ -18,11 +18,11 @@ public class BatteryBank {
         return batteryBank;
     }
 
-    public long findHigherestJoltageOutput(int numberLength) {
-        List<Integer> list = maxSubsequence(this.batteries, numberLength);
+    public long findHighestJoltage(int numberLength) {
+        List<Integer> maxNumberList = maxSubsequence(this.batteries, numberLength);
         StringBuilder numString = new StringBuilder();
-        for(Integer i : list){
-            numString.append(i.toString());
+        for(Integer number : maxNumberList){
+            numString.append(number.toString());
         }
 
         return Long.parseLong(numString.toString());

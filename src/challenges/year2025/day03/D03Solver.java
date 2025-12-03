@@ -16,10 +16,10 @@ public class D03Solver {
         BatteryBlock testBatteryBlock = new BatteryBlock(debug);
         BatteryBlock batteryBlock = new BatteryBlock(input);
 
-        IO.println(testBatteryBlock.findTotalestJoltage(2));
-        IO.println(batteryBlock.findTotalestJoltage(2));
+        //IO.println(testBatteryBlock.findTotalJoltage(2));
+        //IO.println(batteryBlock.findTotalJoltage(2));
 
-        IO.println(testBatteryBlock.findTotalestJoltage(12));
-        IO.println(batteryBlock.findTotalestJoltage(12));
+        IO.println(testBatteryBlock.findTotalJoltage(12));
+        //IO.println(batteryBlock.findTotalJoltage(12));
     }
 }
