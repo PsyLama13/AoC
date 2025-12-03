@@ -16,10 +16,10 @@ public class D2Solver {
         SequenceGenerator testGenerator = new SequenceGenerator(debug);
         SequenceGenerator prodGenerator = new SequenceGenerator(input);
 
-        IO.println(testGenerator.calcSillySum(2));
-        IO.println(prodGenerator.calcSillySum(2));
+        IO.println(testGenerator.calcSillySum(new IdPredicate(2)));
+        IO.println(prodGenerator.calcSillySum(new IdPredicate(2)));
 
-        IO.println(testGenerator.calcSillySum(null));
-        IO.println(prodGenerator.calcSillySum(null));
+        IO.println(testGenerator.calcSillySum(new IdPredicate()));
+        IO.println(prodGenerator.calcSillySum(new IdPredicate()));
     }
 }

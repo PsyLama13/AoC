@@ -6,11 +6,9 @@ import java.util.List;
 public class SafeSolver {
     List<Command> commandList = new ArrayList<>();
     Integer currentValue;
-    Integer zerorounds = 0;
+    Integer zeroRounds;
 
     public SafeSolver(List<String> debug) {
-        currentValue = 50;
-
         for (String s : debug) {
             Command command = Command.fromString(s);
             commandList.add(command);
@@ -18,17 +16,31 @@ public class SafeSolver {
     }
 
     public Integer solve1() {
+        currentValue = 50;
+        zeroRounds = 0;
         for (Command command : commandList) {
             applyCommand(command);
             applyZeroRound();
         }
 
-        return zerorounds;
+        return zeroRounds;
+    }
+
+    public Integer solve2() {
+        currentValue = 50;
+        zeroRounds = 0;
+        for (Command command : commandList) {
+            handleZeroTurnOvers(command);
+            applyCommand(command);
+            printCommand(command);
+        }
+
+        return zeroRounds;
     }
 
     private void applyZeroRound() {
         if (currentValue == 0) {
-            zerorounds++;
+            zeroRounds++;
         }
     }
 
@@ -45,22 +57,11 @@ public class SafeSolver {
         currentValue = Math.floorMod(currentValue, 100);
     }
 
-    public Integer solve2() {
-
-        for (Command command : commandList) {
-            handleZeroTurnOvers(command);
-            applyCommand(command);
-            printCommand(command);
-        }
-
-        return zerorounds;
-    }
-
     private void printCommand(Command command) {
-        IO.println(currentValue + " after " + command.rotation().toString() + command.value() + ": zeros are " + zerorounds);
+        IO.println(currentValue + " after " + command.rotation().toString() + command.value() + ": zeros are " + zeroRounds);
     }
 
     private void handleZeroTurnOvers(Command command) {
-        zerorounds += command.getZeroTurnovers(currentValue);
+        zeroRounds += command.getZeroTurnovers(currentValue);
     }
 }

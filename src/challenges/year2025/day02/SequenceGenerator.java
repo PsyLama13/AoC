@@ -15,11 +15,7 @@ public class SequenceGenerator {
         }
     }
 
-    public long calcSillySum(Integer repeater) {
-        long output = 0L;
-        for (NumberRange numberRange : rangeList) {
-            output += numberRange.addUpInvalidIds(repeater);
-        }
-        return output;
+    public long calcSillySum(IdPredicate predicate) {
+        return rangeList.stream().mapToLong(i -> i.addUpInvalidIds(predicate)).sum();
     }
 }
