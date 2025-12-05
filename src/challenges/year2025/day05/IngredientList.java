@@ -36,7 +36,7 @@ public class IngredientList {
 
     private List<IngredientRange> mergeIngredientList(List<IngredientRange> ingredientList) {
         while (true) {
-            boolean newMerge = false;
+            boolean hasMergedThisRound = false;
             for (int i = 0; i < ingredientList.size() - 1; i++) {
                 for (int j = i + 1; j < ingredientList.size(); j++) {
                     IngredientRange rangeA = ingredientList.get(i);
@@ -44,12 +44,12 @@ public class IngredientList {
                     if (IngredientRange.haveOverlap(rangeA, rangeB)) {
                         ingredientList.removeAll(List.of(rangeA, rangeB));
                         ingredientList.add(rangeA.merge(rangeB));
-                        newMerge = true;
+                        hasMergedThisRound = true;
                         break;
                     }
                 }
             }
-            if (!newMerge) {
+            if (!hasMergedThisRound) {
                 return ingredientList;
             }
         }

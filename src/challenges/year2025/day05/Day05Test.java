@@ -13,7 +13,9 @@ public class Day05Test {
         List<String> input = Helper.readInput("year2025/d5.txt");
 
     public Day05Test() throws IOException {
+        // utility
     }
+
 
     @Test
     void part1Test(){
