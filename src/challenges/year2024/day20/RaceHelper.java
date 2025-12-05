@@ -49,7 +49,7 @@ public class RaceHelper {
         int distance = 0;
         do {
             distanceMap.put(pos, distance++);
-            pos = pos.getNeighbours().stream().filter(i -> !map.containsKey(i) && !map.get(i).equals(Field.WALL) && !distanceMap.containsKey(i)).findFirst().orElse(null);
+            pos = pos.getFourNeighbours().stream().filter(i -> !map.containsKey(i) && !map.get(i).equals(Field.WALL) && !distanceMap.containsKey(i)).findFirst().orElse(null);
         } while (pos != null);
         return distanceMap;
     }

@@ -77,8 +77,12 @@ public record Coordinate(long x, long y) {
         };
     }
 
-    public List<Coordinate> getNeighbours() {
+    public List<Coordinate> getFourNeighbours() {
         return List.of(this.up(), this.down(), this.right(), this.left());
+    }
+
+    public List<Coordinate> getEightNeighbours() {
+        return List.of(this.up(), this.down(), this.left(), this.right(), this.upLeft(), this.upRight(), this.downLeft(), this.downRight());
     }
 
     public List<Coordinate> getNeighboursInDistance(int distance) {
