@@ -10,10 +10,16 @@ public class Helper {
         throw new IllegalStateException("Utility class");
     }
 
-    public static List<String> readInput(String location) throws IOException {
+    public static List<String> readInput(String location) {
 
         String locationPrefix = "src/resources/";
-        String content = new String(Files.readAllBytes(Paths.get(locationPrefix + location)));
+        String content = null;
+        try {
+            content = new String(Files.readAllBytes(Paths.get(locationPrefix + location)));
+        } catch (IOException e) {
+            IO.println("error while parsing " + locationPrefix + location + " excception was: " + e);
+            return null;
+        }
 
         return List.of(content.split("\r\n"));
     }
