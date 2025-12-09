@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class Day09 {
+public class Day09Test {
 
     List<String> debug = Helper.readInput("year2025/d9d.txt");
     List<String> input = Helper.readInput("year2025/d9.txt");
@@ -25,6 +25,7 @@ public class Day09 {
         GridList gridList = new GridList(input);
         long val = gridList.getBiggestSpanningArea();
         IO.println(val);
+        assertEquals(4777409595L, val);
     }
 
     @Test
@@ -39,5 +40,6 @@ public class Day09 {
         GridList gridList = new GridList(input);
         long val = gridList.getBiggestSpanningAreaInsideArea();
         IO.println(val);
+        assertEquals(1473551379L, val);
     }
 }

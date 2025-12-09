@@ -1,12 +1,17 @@
 package challenges.year2024.day20;
 
+import helper.Coordinate;
 import helper.Helper;
 
 import java.util.*;
 import java.util.function.Predicate;
 
 public class Day20 {
-    public static void main(String[] args) throws Exception {
+    private Day20() {
+        throw new IllegalArgumentException("utility class");
+    }
+
+    static void main() {
         new Puzzle().solve();
     }
 }
@@ -14,48 +19,22 @@ public class Day20 {
 class Puzzle {
     private final Grid grid;
 
-    Puzzle() throws Exception {
-
+    Puzzle() {
         grid = Grid.from(Helper.readInput("year2024/d20.txt"));
-
     }
 
     void solve() {
         var map = grid.distanceMap();
-        System.out.println(grid.countGoodCheats(map, 2));
-        System.out.println(grid.countGoodCheats(map, 20));
-    }
-}
-
-record Coordinate(int x, int y) implements Comparable<Coordinate> {
-    @Override
-    public int compareTo(Coordinate o) {
-        return y == o.y ? Integer.compare(x, o.x) : Integer.compare(y, o.y);
-    }
-
-    Collection<Coordinate> neighbours() {
-        return Set.of(
-                new Coordinate(x, y - 1),
-                new Coordinate(x + 1, y),
-                new Coordinate(x, y + 1),
-                new Coordinate(x - 1, y)
-        );
-    }
-
-    Collection<Coordinate> neighbours(int cheatDistance) {
-        Collection<Coordinate> neighbours = new TreeSet<>();
-        for (int i = 0; i < cheatDistance; i++) {
-            neighbours.add(new Coordinate(x + i, y - cheatDistance + i));
-            neighbours.add(new Coordinate(x + cheatDistance - i, y + i));
-            neighbours.add(new Coordinate(x - i, y + cheatDistance - i));
-            neighbours.add(new Coordinate(x - cheatDistance + i, y - i));
-        }
-        return neighbours;
+        IO.println(grid.countGoodCheats(map, 2));
+        IO.println(grid.countGoodCheats(map, 20));
     }
 }
 
 record Grid(int width, int height, Set<Coordinate> walls, Coordinate start, Coordinate finish) {
     static Grid from(List<String> lines) {
+        if (lines == null) {
+            return null;
+        }
         Set<Coordinate> walls = new HashSet<>();
         Coordinate start = null;
         Coordinate end = null;
@@ -68,7 +47,7 @@ record Grid(int width, int height, Set<Coordinate> walls, Coordinate start, Coor
                     case 'S' -> start = new Coordinate(x, y);
                     case 'E' -> end = new Coordinate(x, y);
                     case '#' -> walls.add(new Coordinate(x, y));
-                    case '.' -> {
+                    case '.' -> { //do nothing on purpose
                     }
                     default -> throw new IllegalArgumentException();
                 }
@@ -85,7 +64,7 @@ record Grid(int width, int height, Set<Coordinate> walls, Coordinate start, Coor
         int distance = 0;
         do {
             distanceMap.put(pos, distance++);
-            pos = pos.neighbours().stream().filter(Predicate.not(walls::contains)).filter(Predicate.not(distanceMap::containsKey)).findFirst().orElse(null);
+            pos = pos.getFourNeighbours().stream().filter(Predicate.not(walls::contains)).filter(Predicate.not(distanceMap::containsKey)).findFirst().orElse(null);
         } while (pos != null);
         return distanceMap;
     }
@@ -96,7 +75,7 @@ record Grid(int width, int height, Set<Coordinate> walls, Coordinate start, Coor
             Coordinate cheatStart = e.getKey();
             int distance = e.getValue();
             for (int cheatDuration = 2; cheatDuration <= maxCheatDuration; cheatDuration++) {
-                for (var cheatEnd : cheatStart.neighbours(cheatDuration)) {
+                for (var cheatEnd : cheatStart.getNeighboursInDistance(cheatDuration)) {
                     Integer newDistance = distances.get(cheatEnd);
                     if (newDistance != null) {
                         cheats.put(List.of(cheatStart, cheatEnd), newDistance - distance - cheatDuration);

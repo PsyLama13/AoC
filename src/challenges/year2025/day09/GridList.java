@@ -24,7 +24,8 @@ public class GridList {
             for (int j = i + 1; j < redTiles.size(); j++) {
                 Coordinate c1 = redTiles.get(i);
                 Coordinate c2 = redTiles.get(j);
-                long area = Coordinate.getSpanningAreaForTiles(c1, c2);
+                Rectangle rectangle = new Rectangle(c1, c2);
+                long area = rectangle.getArea();
                 if (area > currentBiggestArea) {
                     currentBiggestArea = area;
                 }
@@ -41,11 +42,11 @@ public class GridList {
             for (int j = i + 1; j < redTiles.size(); j++) {
                 Coordinate c1 = redTiles.get(i);
                 Coordinate c2 = redTiles.get(j);
-
-                boolean intersectsEdge = lineSet.stream().anyMatch(l -> l.intersectsRectangle(c1, c2));
-                if (!intersectsEdge) {
-                    long area = Coordinate.getSpanningAreaForTiles(c1, c2);
-                    if (area > biggestArea) {
+                Rectangle rectangle = new Rectangle(c1, c2);
+                long area = rectangle.getArea();
+                if (area > biggestArea) {
+                    boolean intersectsEdge = lineSet.stream().anyMatch(rectangle::intersects);
+                    if (!intersectsEdge) {
                         biggestArea = area;
                     }
                 }

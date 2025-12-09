@@ -29,17 +29,6 @@ public class DoorPad {
         throw new IllegalStateException("Utility Class");
     }
 
-    public static String encode(String code) {
-        Coordinate current = start;
-        StringBuilder output = new StringBuilder();
-        for (String s : code.split("")) {
-            getNextSequence(current, output, s);
-            output.append("A");
-            current = map.get(s);
-        }
-        return output.toString();
-    }
-
     private static void getNextSequence(Coordinate current, StringBuilder output, String s) {
         Coordinate next = map.get(s);
 
