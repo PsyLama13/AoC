@@ -57,7 +57,7 @@ public class ConstructionKit {
                 String varA = arr[0];
                 String varB = arr[2];
                 String out = arr[4];
-                Variable vA = new Variable(varA, null);
+                //Variable vA = new Variable(varA, null);
                 //Statement statement = new Statement(varA, varB, out, bitAnd);
                 //functionSet.add(statement);
             }

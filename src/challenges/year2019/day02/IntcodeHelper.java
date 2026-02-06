@@ -1,4 +1,4 @@
-package challenges.year2019.day2;
+package challenges.year2019.day02;
 
 import java.util.ArrayList;
 import java.util.List;

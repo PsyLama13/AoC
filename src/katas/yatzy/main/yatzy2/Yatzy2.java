@@ -9,11 +9,6 @@ public class Yatzy2 implements YatzyCalculator {
     static final List<Integer> DICE_VALUES = Arrays.asList(6, 5, 4, 3, 2, 1);
 
     @Override
-    public List<String> validCategories() {
-        return Arrays.stream(YatzyCategory.values()).map(Enum::toString).toList();
-    }
-
-    @Override
     public int score(List<Integer> dice, String categoryName) {
         YatzyCategory category = YatzyCategory.valueOf(categoryName);
         Map<Integer, Integer> diceFrequencies = createDiceFrequencyMap(dice);
@@ -71,8 +66,7 @@ public class Yatzy2 implements YatzyCalculator {
     private int getStraightScore(Map<Integer, Integer> diceFrequencies, int notNeeded) {
 
         List<Integer> expected = new ArrayList<>(DICE_VALUES);
-        int index = expected.indexOf(notNeeded);
-        expected.remove(index); // remove 6 from expected, as it is not needed
+        expected.remove((Integer) notNeeded); // remove 6 from expected, as it is not needed
 
         if (diceFrequencies.get(notNeeded) != 0) {
             return 0;

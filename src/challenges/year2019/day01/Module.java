@@ -1,4 +1,4 @@
-package challenges.year2019.day1;
+package challenges.year2019.day01;
 
 public class Module {
     int mass;

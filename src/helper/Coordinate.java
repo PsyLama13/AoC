@@ -6,6 +6,10 @@ import java.util.List;
 public record Coordinate(long x, long y) {
     // top left is 0,0
 
+    public static Integer calculateManhattanDistance(Coordinate a, Coordinate b) {
+        return Math.toIntExact(Math.abs(a.x - b.x) + Math.abs(a.y - b.y));
+    }
+
     public Coordinate up() {
         return new Coordinate(x, y - 1);
     }
