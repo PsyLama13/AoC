@@ -1,15 +1,15 @@
 package katas.gildedrose.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GildedRose {
     public final List<ShopItem> shopItems = new ArrayList<>();
 
     public GildedRose(Item[] items) {
-        for (Item item : items) {
-            shopItems.add(new ShopItem(item));
-        }
+        this.shopItems.addAll(Arrays.stream(items).map(ShopItem::new).toList());
     }
 
     public void updateQuality() {
@@ -18,10 +18,8 @@ public class GildedRose {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (ShopItem item : shopItems) {
-            sb.append(item.item).append("\n");
-        }
-        return sb.toString();
+        return shopItems.stream()
+                .map(si -> si.getItem().toString())
+                .collect(Collectors.joining("\n", "", "\n"));
     }
 }

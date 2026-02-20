@@ -7,3 +7,5 @@ Backstage passes to a TAFKAL80ETC concert, 10, 25
 Backstage passes to a TAFKAL80ETC concert, 5, 50
 Backstage passes to a TAFKAL80ETC concert, 0, 50
 Conjured Mana Cake, -2, 0
+Conjured Aged Brie, -3, 16
+Conjured Backstage passes to a TAFKAL80ETC concert, 10, 30

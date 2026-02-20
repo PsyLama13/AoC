@@ -33,7 +33,7 @@ public class Rules {
     }
 
     public static ShopItem.UpdateRule legendary() {
-        // legendary items always have the quality 80 (or in this case the neither change sellIn nor quality)
+        // legendary items always have quality 80 (or in this case the neither change sellIn nor quality)
         return s -> s;
     }
 
@@ -50,7 +50,20 @@ public class Rules {
         };
     }
 
+    public static ShopItem.UpdateRule conjured(ShopItem.UpdateRule base) {
+        return i -> {
+            int qualityBefore = i.quality;
+            base.apply(i);
+            int qualityDelta = i.quality - qualityBefore;
+            i.quality = Math.clamp(i.quality + qualityDelta, 0, 50);
+            return i;
+        };
+    }
+
     public static ShopItem.UpdateRule getRuleByItemName(String name) {
+        if (name.startsWith("Conjured ")) {
+            return conjured(getRuleByItemName(name.substring("Conjured ".length())));
+        }
         return switch (name) {
             case "Sulfuras, Hand of Ragnaros" -> legendary();
             case "Backstage passes to a TAFKAL80ETC concert" -> backstagePass();

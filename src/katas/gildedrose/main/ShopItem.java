@@ -1,7 +1,7 @@
 package katas.gildedrose.main;
 
 public class ShopItem {
-    public Item item;
+    private Item item;
     UpdateRule rule;
 
     public ShopItem(Item item) {
@@ -16,5 +16,9 @@ public class ShopItem {
 
     public void tick() {
         item = rule.apply(this.item);
+    }
+
+    public Item getItem() {
+        return item;
     }
 }
