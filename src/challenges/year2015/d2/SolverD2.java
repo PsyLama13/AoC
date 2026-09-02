@@ -8,7 +8,7 @@ import java.util.List;
 public class SolverD2 {
 
     public static void main(String[] args) throws IOException {
-        List<String> input = Helper.readInput("year2015/d2.txt");
+        List<String> input = Helper.readInput("year2015/d02.txt");
 
         GiftTracker giftTracker = new GiftTracker(input);
         System.out.println(giftTracker.calculateNumberOfGiftedHomes());

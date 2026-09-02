@@ -9,7 +9,7 @@ import java.util.logging.Level;
 
 public class SolverD2 extends Solver {
     public static void main(String[] args) throws IOException {
-        List<String> input = Helper.readInput("year2024/d2.txt");
+        List<String> input = Helper.readInput("year2024/d02.txt");
         List<String> debug = Helper.readInput("year2024/d2d.txt");
 
         ReactorHelper reactorHelperDebug = new ReactorHelper(debug);

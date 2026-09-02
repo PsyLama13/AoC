@@ -12,7 +12,7 @@ public class D2Solver {
 
     public static void main() throws IOException {
         List<String> debug = Helper.readInput("year2025/d2d.txt");
-        List<String> input = Helper.readInput("year2025/d2.txt");
+        List<String> input = Helper.readInput("year2025/d02.txt");
         SequenceGenerator testGenerator = new SequenceGenerator(debug);
         SequenceGenerator prodGenerator = new SequenceGenerator(input);
 
